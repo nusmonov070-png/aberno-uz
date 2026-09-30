@@ -1,13 +1,19 @@
 /* ===== Aberno — umumiy uslublar ===== */
 /* Brend ranglari katalogdan: to'q ko'k (#173455) va oltin (#c5a86c) */
 :root {
-  --blue-900: #173455;
-  --blue-700: #24466e;
-  --blue-500: #2f5a8c;
+  /* Manba ranglar: --p* asosiy (to'q), --a* urg'u. Rang mavzulari faqat shularni almashtiradi */
+  --p: #173455;
+  --p2: #24466e;
+  --p3: #2f5a8c;
+  --a: #c5a86c;
+  --a2: #9c7f42;
+  --blue-900: var(--p);
+  --blue-700: var(--p2);
+  --blue-500: var(--p3);
   --blue-300: #d9c69c;
   --blue-100: #f4eee1;
-  --gold: #c5a86c;
-  --gold-dark: #9c7f42;
+  --gold: var(--a);
+  --gold-dark: var(--a2);
   --text: #1c2733;
   --muted: #5d6b7a;
   --bg: #ffffff;
@@ -16,6 +22,7 @@
   --heading: #173455;
   --surface: #ffffff;
   --header-bg: rgba(255,255,255,.96);
+  --footer-bg: #0f2640;
   --radius: 16px;
   --shadow: 0 10px 30px rgba(23, 52, 85, 0.10);
   --max: 1180px;
@@ -95,8 +102,8 @@ p { color: var(--muted); }
 .logo-mark img { width: 100%; height: 100%; object-fit: cover; }
 .logo small { display: block; font-size: 10px; letter-spacing: .3em; color: var(--gold-dark); font-weight: 600; line-height: 1; }
 .logo b { display: block; line-height: 1.1; }
-.nav { display: flex; gap: 4px; align-items: center; }
-.nav a { padding: 10px 14px; border-radius: 10px; font-weight: 500; font-size: 15px; color: var(--text); transition: .2s; }
+.nav { display: flex; gap: 2px; align-items: center; }
+.nav a { padding: 10px 11px; white-space: nowrap; border-radius: 10px; font-weight: 500; font-size: 15px; color: var(--text); transition: .2s; }
 .nav a:hover, .nav a.active { color: var(--blue-500); background: var(--blue-100); }
 .nav .btn { margin-left: 8px; padding: 10px 20px; color: var(--blue-900); background: var(--gold); }
 .nav .btn:hover, .nav .btn.active { color: #fff; background: var(--blue-900); }
@@ -264,7 +271,7 @@ tr:last-child td { border-bottom: 0; }
 .map iframe { width: 100%; height: 100%; border: 0; }
 
 /* ===== Footer ===== */
-.footer { background: #0f2640; color: #b9cde2; padding: 64px 0 24px; margin-top: 0; }
+.footer { background: var(--footer-bg); color: #b9cde2; padding: 64px 0 24px; margin-top: 0; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 36px; }
 .footer .logo { color: #fff; margin-bottom: 14px; }
 .footer .logo small { color: var(--gold); }
@@ -293,7 +300,8 @@ tr:last-child td { border-bottom: 0; }
   .products, .grid-4, .steps { grid-template-columns: repeat(3, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
-@media (max-width: 900px) {
+/* Header menyusi 1100px dan torroq ekranda burger menyuga o'tadi */
+@media (max-width: 1100px) {
   .burger { display: block; }
   .nav {
     position: fixed; top: 76px; left: 0; right: 0; background: var(--surface); flex-direction: column;
@@ -306,6 +314,8 @@ tr:last-child td { border-bottom: 0; }
   .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .burger.open span:nth-child(2) { opacity: 0; }
   .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+@media (max-width: 900px) {
   .hero .container, .split { grid-template-columns: 1fr; }
   .split.reverse .split-media { order: 0; }
   .hero-visual { max-width: 380px; margin: 0 auto; width: 100%; }
@@ -365,7 +375,7 @@ tr:last-child td { border-bottom: 0; }
 .gallery figure:hover img { transform: scale(1.06); }
 .gallery figcaption {
   position: absolute; inset: auto 0 0 0; padding: 30px 14px 12px; color: #fff; font-weight: 600; font-size: 15px;
-  background: linear-gradient(transparent, rgba(15,38,64,.85));
+  background: linear-gradient(transparent, color-mix(in srgb, var(--footer-bg) 85%, transparent));
 }
 
 /* Qadriyatlar */
@@ -424,16 +434,84 @@ tr:last-child td { border-bottom: 0; }
 [data-theme="dark"] .theme-toggle .knob { transform: translateX(32px); }
 [data-theme="dark"] .theme-toggle .ic-sun { color: var(--muted); }
 [data-theme="dark"] .theme-toggle .ic-moon { color: var(--blue-900); fill: var(--blue-900); }
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .theme-toggle { margin-left: auto; margin-right: 8px; }
 }
 /* O'rta ekranlarda (planshet, kichik noutbuk) menyu sig'ishi uchun ixchamroq */
-@media (min-width: 901px) and (max-width: 1200px) {
+@media (min-width: 1101px) and (max-width: 1240px) {
   .nav { gap: 0; }
   .nav a { padding: 8px 9px; font-size: 14px; }
   .nav .btn { margin-left: 6px; padding: 8px 14px; }
   .theme-toggle { margin-left: 8px; }
 }
-@media (min-width: 901px) and (max-width: 1060px) {
-  .header .logo > span:last-child { display: none; }
+
+/* ===== Rang mavzulari (html[data-color] — js/main.js va <head> skripti o'rnatadi) ===== */
+/* Selektor html'ga bog'lanmagan: panel tugmalari ham shu atribut orqali o'z ranglarini oladi */
+[data-color="aberno"]   { --p: #173455; --p2: #24466e; --p3: #2f5a8c; --a: #c5a86c; --a2: #9c7f42; }
+[data-color="zumrad"]   { --p: #0f3d2e; --p2: #17563f; --p3: #1f7a57; --a: #d4a857; --a2: #95702a; }
+[data-color="bordo"]    { --p: #4a1020; --p2: #6b1a2f; --p3: #8f2640; --a: #e0b36a; --a2: #9c7433; }
+[data-color="binafsha"] { --p: #2e1a4f; --p2: #432872; --p3: #5b3a99; --a: #e6b85c; --a2: #9e7428; }
+[data-color="okean"]    { --p: #0b3c49; --p2: #11566a; --p3: #177489; --a: #f0a85a; --a2: #a8642a; }
+[data-color="grafit"]   { --p: #1f2328; --p2: #33383f; --p3: #4a525c; --a: #d4af37; --a2: #93771a; }
+[data-color="qizil"]    { --p: #5a1212; --p2: #7d1c1c; --p3: #a32626; --a: #f2c14e; --a2: #a37d1c; }
+[data-color="jigarrang"]{ --p: #4a2a12; --p2: #6b3d1b; --p3: #8f5427; --a: #f29f3d; --a2: #a8601a; }
+[data-color="osmon"]    { --p: #12306e; --p2: #1b4299; --p3: #2a5bc4; --a: #f5c542; --a2: #9c7a12; }
+[data-color="pushti"]   { --p: #5a1a3c; --p2: #7a2552; --p3: #a3336e; --a: #f2a7c3; --a2: #a8506f; }
+
+/* Tanlangan mavzuda och fonlar va chiziqlar urg'u rangidan hosil qilinadi */
+:root[data-color] {
+  --blue-100: color-mix(in srgb, var(--a) 18%, #fff);
+  --blue-300: color-mix(in srgb, var(--a) 60%, #fff);
+  --bg-soft: color-mix(in srgb, var(--a) 7%, #fff);
+  --line: color-mix(in srgb, var(--a) 22%, #e6e6e6);
+  --heading: var(--p);
+  --shadow: 0 10px 30px color-mix(in srgb, var(--p) 12%, transparent);
+  --footer-bg: color-mix(in srgb, var(--p) 80%, #000);
+}
+:root[data-theme="dark"][data-color] {
+  --bg: color-mix(in srgb, var(--p) 30%, #080a0d);
+  --bg-soft: color-mix(in srgb, var(--p) 42%, #0a0c10);
+  --surface: color-mix(in srgb, var(--p) 50%, #0c0f13);
+  --line: color-mix(in srgb, var(--p) 55%, #2c3036);
+  --blue-100: color-mix(in srgb, var(--p) 70%, #101318);
+  --blue-300: color-mix(in srgb, var(--p3) 60%, #555);
+  --blue-500: color-mix(in srgb, var(--p3) 45%, #fff);
+  --gold-dark: color-mix(in srgb, var(--a) 80%, #fff);
+  --heading: #f2f5f9;
+  --header-bg: color-mix(in srgb, var(--bg) 94%, transparent);
+  --footer-bg: color-mix(in srgb, var(--p) 45%, #000);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* ===== Rang tanlash tugmasi va paneli ===== */
+.color-picker { position: relative; margin-left: 8px; flex-shrink: 0; }
+.color-btn {
+  display: block; width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(circle, var(--gold) 0 6px, var(--surface) 7px 9px, transparent 10px),
+    conic-gradient(#173455, #1f7a57, #8f2640, #5b3a99, #177489, #4a525c, #a32626, #f29f3d, #2a5bc4, #a3336e, #173455);
+  transition: transform .2s, border-color .2s;
+}
+.color-btn:hover { transform: rotate(30deg); border-color: var(--gold); }
+.color-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.color-panel {
+  position: absolute; top: calc(100% + 12px); right: 0; z-index: 60;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+  box-shadow: var(--shadow); padding: 14px 16px 12px;
+}
+.color-panel[hidden] { display: none; }
+.color-panel .title { font-size: 13px; font-weight: 700; color: var(--heading); margin-bottom: 10px; }
+.swatches { display: grid; grid-template-columns: repeat(5, 34px); gap: 10px; }
+.swatch {
+  width: 34px; height: 34px; border-radius: 50%; cursor: pointer; border: 0;
+  background: linear-gradient(135deg, var(--p) 0 50%, var(--a) 50% 100%);
+  transition: transform .15s;
+}
+.swatch:hover { transform: scale(1.12); }
+.swatch:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.swatch[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--heading); }
+.color-panel .color-name { display: block; margin-top: 10px; font-size: 13px; color: var(--muted); text-align: center; }
+@media (max-width: 1100px) {
+  .color-picker { margin-left: 0; margin-right: 8px; }
 }

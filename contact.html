@@ -8,7 +8,7 @@
   <link rel="icon" href="images/logo-mark.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script>try{var t=localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");if(t==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+  <script>try{var d=document.documentElement,t=localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"),c=localStorage.getItem("color");if(t==="dark")d.dataset.theme="dark";if(c&&c!=="aberno")d.dataset.color=c}catch(e){}</script>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -37,11 +37,19 @@
         <svg class="ic-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
         <span class="knob"></span>
       </button>
+      <div class="color-picker">
+        <button class="color-btn" type="button" aria-label="Sayt rangini tanlash" aria-haspopup="true" aria-expanded="false" title="Sayt rangi"></button>
+        <div class="color-panel" hidden>
+          <p class="title">Sayt rangi</p>
+          <div class="swatches"></div>
+          <span class="color-name"></span>
+        </div>
+      </div>
       <button class="burger" aria-label="Menyu"><span></span><span></span><span></span></button>
     </div>
   </header>
 
-  <section class="page-hero" style="background-image: linear-gradient(135deg, rgba(23,52,85,.94), rgba(36,70,110,.84)), url('images/factory.jpg')">
+  <section class="page-hero" style="background-image: linear-gradient(135deg, color-mix(in srgb, var(--blue-900) 94%, transparent), color-mix(in srgb, var(--blue-700) 84%, transparent)), url('images/factory.jpg')">
     <div class="container">
       <div class="breadcrumb"><a href="index.html">Bosh sahifa</a> / Bog'lanish</div>
       <h1>Bog'lanish</h1>

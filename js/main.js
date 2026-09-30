@@ -34,6 +34,58 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Sayt rangi (10 ta mavzu; ranglarning o'zi css/style.css da [data-color] bo'yicha)
+  const picker = document.querySelector(".color-picker");
+  if (picker) {
+    const COLORS = [
+      ["aberno", "Aberno (asl)"], ["zumrad", "Zumrad"], ["bordo", "Bordo"], ["binafsha", "Binafsha"],
+      ["okean", "Okean"], ["grafit", "Grafit"], ["qizil", "Qizil"], ["jigarrang", "Jigarrang"],
+      ["osmon", "Osmon"], ["pushti", "Pushti"],
+    ];
+    const root = document.documentElement;
+    const btn = picker.querySelector(".color-btn");
+    const panel = picker.querySelector(".color-panel");
+    const nameEl = picker.querySelector(".color-name");
+    const box = picker.querySelector(".swatches");
+    const current = () => root.dataset.color || "aberno";
+
+    const mark = () => {
+      box.querySelectorAll(".swatch").forEach((s) => s.setAttribute("aria-pressed", s.dataset.color === current()));
+      nameEl.textContent = COLORS.find((c) => c[0] === current())?.[1] || "";
+    };
+    COLORS.forEach(([id, name]) => {
+      const s = document.createElement("button");
+      s.type = "button";
+      s.className = "swatch";
+      s.dataset.color = id;
+      s.title = name;
+      s.setAttribute("aria-label", name);
+      s.addEventListener("click", () => {
+        if (id === "aberno") delete root.dataset.color;
+        else root.dataset.color = id;
+        try { localStorage.setItem("color", id); } catch (e) {}
+        mark();
+      });
+      box.appendChild(s);
+    });
+    mark();
+
+    const setOpen = (open) => {
+      panel.hidden = !open;
+      btn.setAttribute("aria-expanded", open);
+    };
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setOpen(panel.hidden);
+    });
+    document.addEventListener("click", (e) => {
+      if (!picker.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !panel.hidden) { setOpen(false); btn.focus(); }
+    });
+  }
+
   // Joriy sahifani menyuda belgilash
   const page = location.pathname.split("/").pop() || "index.html";
   document.querySelectorAll(".nav a").forEach((a) => {
