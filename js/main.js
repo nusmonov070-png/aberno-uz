@@ -16,6 +16,24 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
+  // Yorug' / qorong'u rejim (boshlang'ich holatni <head> dagi skript o'rnatadi)
+  const themeBtn = document.querySelector(".theme-toggle");
+  if (themeBtn) {
+    const root = document.documentElement;
+    const syncLabel = () => {
+      const dark = root.dataset.theme === "dark";
+      themeBtn.setAttribute("aria-label", dark ? "Yorug' rejimni yoqish" : "Qorong'u rejimni yoqish");
+      themeBtn.setAttribute("aria-pressed", dark);
+    };
+    syncLabel();
+    themeBtn.addEventListener("click", () => {
+      const next = root.dataset.theme === "dark" ? "light" : "dark";
+      root.dataset.theme = next;
+      try { localStorage.setItem("theme", next); } catch (e) {}
+      syncLabel();
+    });
+  }
+
   // Joriy sahifani menyuda belgilash
   const page = location.pathname.split("/").pop() || "index.html";
   document.querySelectorAll(".nav a").forEach((a) => {
