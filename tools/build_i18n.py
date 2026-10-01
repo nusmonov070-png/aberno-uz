@@ -162,9 +162,22 @@ def with_switch_and_alternates(html, page, lang):
         html = re.sub(r'(<div class="topbar">\s*<div class="container">.*?)(\s*</div>\s*</div>)',
                       lambda m: m.group(1) + "\n      " + sw + m.group(2), html, count=1, flags=re.S)
     html = re.sub(r'\n  <link rel="alternate" hreflang="[^"]*" href="[^"]*">', "", html)
-    html = re.sub(r'(<link rel="stylesheet" href="(?:\.\./)?css/style\.css">)',
+    html = re.sub(r'(<link rel="stylesheet" href="(?:\.\./)?css/style\.css(?:\?v=\w+)?">)',
                   lambda m: hreflang_links(page) + "\n  " + m.group(1), html, count=1)
     return html
+
+
+def cache_bust(html, root):
+    """css/js havolalariga fayl mazmunidan olingan ?v=... qo'shadi — yangilanishdan keyin brauzer eski faylni ishlatmasin."""
+    import hashlib
+    def ver(m):
+        prefix, path = m.group(1), m.group(2)
+        try:
+            h = hashlib.md5(open(os.path.join(root, path), "rb").read()).hexdigest()[:8]
+        except FileNotFoundError:
+            return m.group(0)
+        return f'{m.group(0).split("=")[0]}="{prefix}{path}?v={h}"'
+    return re.sub(r'\b(?:href|src)="((?:\.\./)?)((?:css|js)/[\w.-]+\.(?:css|js))(?:\?v=\w+)?"', ver, html)
 
 
 def main():
@@ -177,6 +190,7 @@ def main():
     for page in pages:
         src = open(page, encoding="utf-8").read()
         src = with_switch_and_alternates(src, page, "uz")
+        src = cache_bust(src, root)
         open(page, "w", encoding="utf-8").write(src)
 
     for lang in LANGS:
@@ -188,6 +202,7 @@ def main():
             html = html.replace('<html lang="uz">', f'<html lang="{lang}">', 1)
             html = fix_paths(html)
             html = with_switch_and_alternates(html, page, lang)
+            html = cache_bust(html, root)
             open(f"{lang}/{page}", "w", encoding="utf-8").write(html)
         path = f"i18n/missing-{lang}.json"
         if missing:

@@ -11,6 +11,6 @@ b = s.index("  <footer")
 s = s[:a] + open(body_file, encoding="utf-8").read() + s[b:]
 if scripts:
     tags = "".join(f'\n  <script src="{src}"></script>' for src in scripts)
-    s = s.replace('<script src="js/main.js"></script>', '<script src="js/main.js"></script>' + tags)
+    s = re.sub(r'(<script src="js/main\.js(?:\?v=\w+)?"></script>)', lambda m: m.group(1) + tags, s)
 open(out, "w", encoding="utf-8").write(s)
 print("yaratildi:", out)

@@ -630,3 +630,92 @@ tr:last-child td { border-bottom: 0; }
 @media (max-width: 440px) {
   .grid-4, .steps { grid-template-columns: 1fr; }
 }
+
+/* ===== Hamkorlar lentasi ===== */
+.partners-section .section-head { margin-bottom: 32px; }
+.marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee-track { display: flex; width: max-content; animation: marquee 45s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-group { display: flex; gap: 22px; padding-right: 22px; }
+.marquee-group img {
+  width: 96px; height: 96px; border-radius: 22px; object-fit: cover; flex-shrink: 0;
+  box-shadow: var(--shadow); filter: saturate(.85); transition: filter .3s, transform .3s;
+}
+.marquee-group img:hover { filter: none; transform: translateY(-3px); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .marquee { overflow-x: auto; }
+}
+
+/* ===== Video (bosilgandagina YouTube yuklanadi) ===== */
+.video { position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 16/9; box-shadow: var(--shadow); background: #000; }
+.video iframe, .video-play { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-play { padding: 0; cursor: pointer; background: #000; }
+.video-play img { width: 100%; height: 100%; object-fit: cover; opacity: .85; transition: opacity .3s; }
+.video-play:hover img { opacity: 1; }
+.video-play .play {
+  position: absolute; left: 50%; top: 50%; width: 72px; height: 72px; transform: translate(-50%, -50%);
+  border-radius: 50%; background: var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,.35); transition: transform .2s;
+}
+.video-play .play::after {
+  content: ""; position: absolute; left: 29px; top: 22px;
+  border-left: 20px solid var(--blue-900); border-top: 14px solid transparent; border-bottom: 14px solid transparent;
+}
+.video-play:hover .play { transform: translate(-50%, -50%) scale(1.08); }
+
+/* ===== Namuna so'rash oynasi ===== */
+.btn-sm { padding: 9px 18px; font-size: 14px; margin-top: 16px; }
+.sample-dialog {
+  width: min(520px, calc(100% - 32px)); max-height: calc(100% - 32px); margin: auto; padding: 0; border: 0;
+  border-radius: 20px; background: var(--surface); color: var(--text); box-shadow: 0 30px 80px rgba(0,0,0,.35);
+}
+.sample-dialog::backdrop { background: rgba(10, 20, 35, .55); backdrop-filter: blur(3px); }
+.sample-dialog .form { padding: 28px; position: relative; }
+.sample-dialog h3 { font-size: 22px; padding-right: 32px; margin-bottom: 0; }
+.dialog-lead { font-size: 14px; margin-top: -6px; }
+.dialog-close {
+  position: absolute; right: 16px; top: 16px; width: 36px; height: 36px; border-radius: 50%; border: 0;
+  background: var(--bg-soft); color: var(--heading); font-size: 22px; cursor: pointer;
+}
+.dialog-close:hover { background: var(--blue-100); }
+
+/* ===== Suzuvchi Telegram / WhatsApp tugmalari ===== */
+.float-contacts { position: fixed; left: 20px; bottom: 20px; z-index: 40; display: grid; gap: 10px; }
+.fc {
+  width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center; color: #fff;
+  box-shadow: 0 8px 24px rgba(0,0,0,.25); transition: transform .2s;
+}
+.fc:hover { transform: scale(1.08); }
+.fc svg { width: 26px; height: 26px; fill: currentColor; }
+.fc-tg { background: #2aabee; }
+.fc-wa { background: #25d366; }
+@media (max-width: 1024px) {
+  body:has(.cart-bar:not([hidden])) .float-contacts { bottom: 84px; }
+}
+@media (max-width: 600px) {
+  .float-contacts { left: 14px; bottom: 14px; }
+  .fc { width: 46px; height: 46px; }
+}
+
+/* Suzuvchi Telegram: tezkor xabar oynasi */
+.fc-toggle { border: 0; cursor: pointer; position: relative; }
+.fc-toggle::after {
+  content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid #2aabee;
+  animation: fc-pulse 2.4s ease-out infinite; pointer-events: none;
+}
+.fc-toggle.open::after { animation: none; opacity: 0; }
+@keyframes fc-pulse { 0% { transform: scale(.85); opacity: .9; } 100% { transform: scale(1.35); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .fc-toggle::after { animation: none; opacity: 0; } }
+.fc-panel {
+  position: absolute; left: 0; bottom: calc(100% + 12px); width: min(340px, calc(100vw - 28px));
+  background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 24px 60px rgba(0,0,0,.25);
+}
+.fc-panel[hidden] { display: none; }
+.fc-panel .form { padding: 20px; gap: 12px; }
+.fc-panel textarea { min-height: 80px; }
+.fc-title { font-size: 18px; font-weight: 800; color: var(--heading); }
+.fc-sub { font-size: 13px; margin-top: -6px; }
+.fc-links { display: flex; gap: 14px; justify-content: center; font-size: 13px; font-weight: 600; }
+.fc-links a { color: var(--gold-dark); }
+.fc-links a:hover { text-decoration: underline; }

@@ -189,6 +189,53 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Video: YouTube faqat bosilganda yuklanadi (sahifa tez ochiladi)
+  document.querySelectorAll(".video-play").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const f = document.createElement("iframe");
+      f.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.yt}?autoplay=1&rel=0`;
+      f.title = btn.getAttribute("aria-label") || "Video";
+      f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      f.allowFullscreen = true;
+      btn.replaceWith(f);
+    })
+  );
+
+  // Namuna so'rash oynasi: mahsulot nomi tugma turgan kartochkadan olinadi
+  const dlg = document.getElementById("sample-dialog");
+  if (dlg && dlg.showModal) {
+    const product = dlg.querySelector("[name=product]");
+    document.querySelectorAll("[data-sample]").forEach((b) =>
+      b.addEventListener("click", () => {
+        product.value = b.closest("article")?.querySelector("h3")?.textContent.trim() || "";
+        dlg.querySelector(".form-note").className = "form-note";
+        dlg.showModal();
+        (product.value ? dlg.querySelector("[name=name]") : product).focus();
+      })
+    );
+    dlg.querySelector(".dialog-close").addEventListener("click", () => dlg.close());
+    dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
+  }
+
+  // Suzuvchi Telegram tugmasi: tezkor xabar oynasi (xabar botga — yuqoridagi formalar bilan bir xil yo'l)
+  const fcBtn = document.querySelector(".fc-toggle");
+  const fcPanel = document.getElementById("fc-panel");
+  if (fcBtn && fcPanel) {
+    const setFc = (open) => {
+      fcPanel.hidden = !open;
+      fcBtn.setAttribute("aria-expanded", open);
+      fcBtn.classList.toggle("open", open);
+      if (open) fcPanel.querySelector("[name=name]").focus();
+    };
+    fcBtn.addEventListener("click", (e) => { e.stopPropagation(); setFc(fcPanel.hidden); });
+    document.addEventListener("click", (e) => {
+      if (!fcPanel.hidden && !fcPanel.contains(e.target) && !fcBtn.contains(e.target)) setFc(false);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !fcPanel.hidden) { setFc(false); fcBtn.focus(); }
+    });
+  }
+
   // Yil
   document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
 });
