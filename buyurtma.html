@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Savdo bo'limi — distribyutorlar va savdo agentlari | Aberno</title>
-  <meta name="description" content="Aberno savdo bo'limi: distribyutorlar jamoasi va Toshkent shahri bo'yicha savdo agentlari. Hamkor bo'lish uchun ariza qoldiring.">
+  <title>Onlayn buyurtma — Aberno Group</title>
+  <meta name="description" content="Margaritto, Smaylo margarinlari va Bulut salfetkalarini onlayn buyurtma qiling — menejerimiz tez orada bog'lanadi.">
   <link rel="icon" href="images/logo-mark.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -52,81 +52,38 @@
 
   <section class="page-hero" style="background-image: linear-gradient(135deg, color-mix(in srgb, var(--blue-900) 94%, transparent), color-mix(in srgb, var(--blue-700) 84%, transparent)), url('images/hero-products.jpg')">
     <div class="container">
-      <div class="breadcrumb"><a href="index.html">Bosh sahifa</a> / Savdo bo'limi</div>
-      <h1>Savdo bo'limi</h1>
-      <p>Distribyutorlar jamoasi va Toshkent bo'ylab savdo agentlari</p>
+      <div class="breadcrumb"><a href="index.html">Bosh sahifa</a> / Onlayn buyurtma</div>
+      <h1>Onlayn buyurtma</h1>
+      <p>Mahsulot va sonini tanlang — menejerimiz qo'ng'iroq qilib, buyurtmani tasdiqlaydi</p>
     </div>
   </section>
 
   <section class="section">
-    <div class="container">
-      <div class="grid grid-2">
-        <div class="card reveal">
-          <div class="card-icon">🚚</div>
-          <h3>Distribyutorlar jamoasi</h3>
-          <p>Distribyutsiya bo'limimiz ulgurji hamkorlar va distribyutorlar bilan ishlaydi: buyurtmalarni qabul qiladi, yetkazib berishni rejalashtiradi va hamkorlarni marketing materiallari bilan ta'minlaydi.</p>
-          <ul class="checklist">
-            <li>Distribyutorlar uchun maxsus narxlar</li>
-            <li>Barcha brendlar bo'yicha to'liq assortiment</li>
-            <li>Shaxsiy menejer va muntazam yetkazib berish</li>
-          </ul>
+    <div class="container order-layout">
+      <div>
+        <div class="filters order-filters" data-order-filter>
+          <button class="filter active" data-filter="all">Hammasi</button>
+          <button class="filter" data-filter="margarin">Margarin va spredlar</button>
+          <button class="filter" data-filter="bulut">Bulut</button>
         </div>
-        <div class="card reveal">
-          <div class="card-icon">🧑‍💼</div>
-          <h3>Toshkent savdo agentlari</h3>
-          <p>Toshkent shahri bo'yicha savdo agentlarimiz do'konlar, supermarketlar, kafe, nonvoyxona va qandolatxonalarga bevosita tashrif buyurib, buyurtma qabul qiladi.</p>
-          <ul class="checklist">
-            <li>Agent do'koningizga o'zi keladi</li>
-            <li>Margarin, spred va Bulut salfetkalari — bitta buyurtmada</li>
-            <li>Buyurtmani tez yetkazib berish</li>
-          </ul>
+        <div id="order-products" class="order-products"></div>
+      </div>
+
+      <aside class="order-side" id="savat">
+        <div class="card cart">
+          <h3>Savat</h3>
+          <ul id="cart-lines" class="cart-lines"></ul>
+          <div class="cart-total"><span>Jami</span><strong id="cart-total">0 so'm</strong></div>
+          <p id="cart-note" class="cart-note" hidden>Ba'zi mahsulotlar narxi menejer bilan kelishiladi.</p>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="section soft">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Qamrov</span>
-        <h2>Toshkent tumanlari bo'ylab</h2>
-        <p>Savdo agentlarimiz Toshkent shahrining tumanlarida faoliyat yuritadi.</p>
-      </div>
-      <ul class="region-list reveal"><li>📍 Bektemir</li><li>📍 Chilonzor</li><li>📍 Mirobod</li><li>📍 Mirzo Ulug'bek</li><li>📍 Olmazor</li><li>📍 Sergeli</li><li>📍 Shayxontohur</li><li>📍 Uchtepa</li><li>📍 Yakkasaroy</li><li>📍 Yangihayot</li><li>📍 Yashnobod</li><li>📍 Yunusobod</li></ul>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Jarayon</span>
-        <h2>Buyurtma qanday amalga oshiriladi</h2>
-      </div>
-      <div class="steps">
-        <div class="step reveal"><h3>Tashrif</h3><p>Savdo agenti do'koningizga keladi yoki siz ariza qoldirasiz.</p></div>
-        <div class="step reveal"><h3>Tanlov</h3><p>Assortiment va narxlar bilan tanishib, buyurtma berasiz.</p></div>
-        <div class="step reveal"><h3>Yetkazish</h3><p>Buyurtma kelishilgan vaqtda manzilingizga yetkaziladi.</p></div>
-        <div class="step reveal"><h3>Muntazam ta'minot</h3><p>Agent doimiy aloqada bo'lib, zaxirangizni to'ldirib turadi.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section soft" id="ariza">
-    <div class="container split">
-      <div class="reveal">
-        <span class="eyebrow">Hamkorlik</span>
-        <h2>Distribyutor yoki mijoz bo'ling</h2>
-        <p>Ariza qoldiring — savdo bo'limimiz siz bilan bog'lanadi yoki savdo agenti tashrif buyuradi.</p>
-        <p style="margin-top:14px">Savdo bo'limi: <a href="tel:+998953427070"><b>+998 95 342 70 70</b></a></p>
-      </div>
-      <form class="form reveal">
-        <div class="form-row">
-          <div><label>Ismingiz</label><input name="name" required></div>
-          <div><label>Telefon</label><input name="phone" type="tel" placeholder="+998" required></div>
-        </div>
-        <div class="form-row">
-          <div><label>Kim sifatida</label>
-            <select name="type">
+        <form id="order-form" class="form card" novalidate>
+          <h3>Buyurtmachi</h3>
+          <div><label for="o-name">Ismingiz *</label><input id="o-name" name="name" maxlength="60" autocomplete="name" required></div>
+          <div><label for="o-phone">Telefon *</label><input id="o-phone" name="phone" type="tel" maxlength="20" placeholder="+998" autocomplete="tel" required></div>
+          <div><label for="o-type">Kim sifatida</label>
+            <select id="o-type" name="type">
+              <option>Shaxsiy xaridor</option>
               <option>Do'kon / supermarket</option>
               <option>Kafe / restoran</option>
               <option>Nonvoyxona / qandolatxona</option>
@@ -134,14 +91,18 @@
               <option>Boshqa</option>
             </select>
           </div>
-          <div><label>Tuman / viloyat</label><input name="region" placeholder="masalan, Chilonzor"></div>
-        </div>
-        <div><label>Qiziqtirgan mahsulotlar</label><textarea name="message" placeholder="Margarin, spred, Bulut salfetka..."></textarea></div>
-        <button class="btn btn-primary" type="submit">Ariza yuborish</button>
-        <div class="form-note"></div>
-      </form>
+          <div><label for="o-address">Manzil (tuman, ko'cha)</label><input id="o-address" name="address" maxlength="200" autocomplete="street-address" placeholder="masalan, Chilonzor, 9-kvartal"></div>
+          <div><label for="o-comment">Izoh</label><textarea id="o-comment" name="comment" maxlength="500" placeholder="Yetkazish vaqti, qo'shimcha talablar..."></textarea></div>
+          <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+          <button class="btn btn-primary" type="submit">Buyurtma berish</button>
+          <p class="order-hint">Narxlar taxminiy bo'lishi mumkin — yakuniy narx va yetkazib berish shartlarini menejer tasdiqlaydi.</p>
+          <div class="form-note" role="status"></div>
+        </form>
+      </aside>
     </div>
   </section>
+
+  <a href="#savat" class="cart-bar" hidden>🛒 Savat: <span class="count">0</span> · <span class="sum">0 so'm</span> →</a>
 
   <footer class="footer">
     <div class="container">
@@ -188,5 +149,7 @@
 
   <button class="to-top" aria-label="Yuqoriga">↑</button>
   <script src="js/main.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/order.js"></script>
 </body>
 </html>

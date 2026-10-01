@@ -515,3 +515,86 @@ tr:last-child td { border-bottom: 0; }
 @media (max-width: 1100px) {
   .color-picker { margin-left: 0; margin-right: 8px; }
 }
+
+/* Bulut katalogi: shaffof fonli mahsulot rasmlari */
+.product-img img { padding: 8%; transition: transform .4s; }
+.product:hover .product-img img { transform: scale(1.05); }
+.product-body .pack { margin-top: 6px; font-size: 13px; font-weight: 600; color: var(--gold-dark); }
+.product[hidden] { display: none; }
+.split-media.product-showcase { position: relative; background: linear-gradient(160deg, var(--blue-100), var(--surface)); }
+.split-media.product-showcase img { position: absolute; inset: 0; object-fit: contain; padding: 6%; }
+
+/* ===== Onlayn buyurtma (buyurtma.html) ===== */
+.order-layout { display: grid; grid-template-columns: 1fr 380px; gap: 32px; align-items: start; }
+.order-filters { justify-content: flex-start; margin-bottom: 24px; }
+.order-products { display: grid; gap: 16px; }
+.order-card {
+  display: grid; grid-template-columns: 120px 1fr; gap: 20px; align-items: start;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px;
+}
+.order-card[hidden] { display: none; }
+.order-img { border-radius: 12px; overflow: hidden; aspect-ratio: 1; background: linear-gradient(160deg, var(--blue-100), var(--surface)); }
+.order-img img { width: 100%; height: 100%; object-fit: cover; }
+.order-img img[src$=".png"] { object-fit: contain; padding: 6%; }
+.order-info .tag {
+  display: inline-block; font-size: 12px; font-weight: 600; color: var(--gold-dark);
+  background: var(--blue-100); padding: 3px 10px; border-radius: 999px; margin-bottom: 6px;
+}
+.order-info h3 { font-size: 17px; margin-bottom: 10px; }
+.variants { display: grid; gap: 8px; }
+.variants li {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 12px; border-radius: 12px; background: var(--bg-soft);
+}
+.v-text { display: grid; }
+.v-label { font-size: 14px; color: var(--text); }
+.v-price { font-size: 14px; font-weight: 700; color: var(--heading); }
+.stepper { display: flex; align-items: center; flex-shrink: 0; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+.stepper button {
+  width: 34px; height: 34px; border: 0; background: none; cursor: pointer; font-size: 18px;
+  color: var(--heading); border-radius: 50%;
+}
+.stepper button:hover { background: var(--blue-100); }
+.stepper input {
+  width: 44px; border: 0; background: none; text-align: center; font: inherit; font-weight: 700;
+  color: var(--text); -moz-appearance: textfield; appearance: textfield;
+}
+.stepper input::-webkit-outer-spin-button, .stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.stepper input:focus { outline: none; }
+.stepper:focus-within { border-color: var(--blue-500); }
+
+.order-side { position: sticky; top: 96px; display: grid; gap: 16px; }
+.order-side .card:hover { transform: none; box-shadow: none; border-color: var(--line); }
+.cart { padding: 24px; }
+.cart-lines { display: grid; gap: 10px; max-height: 320px; overflow-y: auto; margin: 6px 0 14px; }
+.cart-lines li { display: grid; grid-template-columns: 1fr auto auto; gap: 8px; align-items: start; font-size: 14px; }
+.cart-lines li b { display: block; color: var(--heading); font-weight: 600; line-height: 1.3; }
+.cart-lines li small { color: var(--muted); }
+.cart-lines li span { font-weight: 600; white-space: nowrap; }
+.cart-lines .remove { border: 0; background: none; cursor: pointer; color: var(--muted); font-size: 18px; line-height: 1; padding: 0 2px; }
+.cart-lines .remove:hover { color: #b3261e; }
+.cart-lines .empty-cart { display: block; color: var(--muted); }
+.cart-total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 14px; border-top: 1px solid var(--line); }
+.cart-total strong { font-size: 22px; color: var(--heading); }
+.cart-note { font-size: 13px; margin-top: 6px; }
+#order-form { padding: 24px; }
+#order-form .btn { justify-content: center; }
+.order-hint { font-size: 12px; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.cart-bar {
+  position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 45; display: none;
+  padding: 14px 18px; border-radius: 999px; background: var(--blue-900); color: #fff;
+  font-weight: 600; text-align: center; box-shadow: var(--shadow);
+}
+.cart-bar .sum { color: var(--gold); }
+
+@media (max-width: 1024px) {
+  .order-layout { grid-template-columns: 1fr; }
+  .order-side { position: static; }
+  .cart-bar:not([hidden]) { display: block; }
+  body:has(.cart-bar:not([hidden])) .to-top { bottom: 84px; }
+}
+@media (max-width: 600px) {
+  .order-card { grid-template-columns: 72px 1fr; gap: 14px; padding: 14px; }
+  .variants li { flex-wrap: wrap; }
+}

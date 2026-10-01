@@ -139,8 +139,8 @@ document.addEventListener("DOMContentLoaded", () => {
     toTop.addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
   }
 
-  // Formalar (backend ulanmaguncha faqat tekshiruv va xabar)
-  document.querySelectorAll("form.form").forEach((form) => {
+  // Formalar (backend ulanmaguncha faqat tekshiruv va xabar; buyurtma formasi — js/order.js)
+  document.querySelectorAll("form.form:not(#order-form)").forEach((form) => {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const note = form.querySelector(".form-note");
@@ -160,11 +160,11 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
 });
 
-// Katalog filtri (margarin.html)
+// Katalog filtri (margarin.html, salfetka.html)
 document.addEventListener("DOMContentLoaded", () => {
   const group = document.querySelector("[data-filter-group]");
   if (!group) return;
-  const items = document.querySelectorAll(".catalog-item");
+  const items = document.querySelectorAll("[data-tags]");
   group.addEventListener("click", (e) => {
     const btn = e.target.closest(".filter");
     if (!btn) return;
