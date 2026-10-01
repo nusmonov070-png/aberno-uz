@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Онлайн-заказ — Aberno Group</title>
+  <meta name="description" content="Закажите маргарины Margaritto, Smaylo и салфетки Bulut онлайн — наш менеджер скоро свяжется с вами.">
+  <link rel="icon" href="../images/logo-mark.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>try{var d=document.documentElement,t=localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"),c=localStorage.getItem("color");if(t==="dark")d.dataset.theme="dark";if(c&&c!=="aberno")d.dataset.color=c}catch(e){}</script>
+  <link rel="alternate" hreflang="uz" href="https://nusmonov070-png.github.io/aberno-uz/buyurtma.html">
+  <link rel="alternate" hreflang="ru" href="https://nusmonov070-png.github.io/aberno-uz/ru/buyurtma.html">
+  <link rel="alternate" hreflang="en" href="https://nusmonov070-png.github.io/aberno-uz/en/buyurtma.html">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container">
+      <span class="hide-sm">📍 г. Ташкент, Яшнабадский район, ул. Уйсозлар, 72</span>
+      <span><a href="tel:+998953427070">📞 +998 95 342 70 70</a> &nbsp;|&nbsp; <a href="tel:+998712300900">+998 71 230 09 00</a></span>
+      <nav class="lang-switch" aria-label="Til / Язык / Language"><a href="../buyurtma.html" hreflang="uz">UZ</a><a href="buyurtma.html" hreflang="ru" class="active" aria-current="true">RU</a><a href="../en/buyurtma.html" hreflang="en">EN</a></nav>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo"><span class="logo-mark"><img src="../images/logo-mark.jpg" alt=""></span><span><b>ABERNO</b><small>GROUP</small></span></a>
+      <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="about.html">О нас</a>
+        <a href="margarin.html">Маргарин</a>
+        <a href="salfetka.html">Bulut</a>
+        <a href="xomashyo.html">Сырьё</a>
+        <a href="savdo.html">Продажи</a>
+        <a href="contact.html">Контакты</a>
+        <a href="buyurtma.html" class="btn">🛒 Заказ</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Включить тёмную тему" title="Светлая / тёмная тема">
+        <svg class="ic-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+        <svg class="ic-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+        <span class="knob"></span>
+      </button>
+      <div class="color-picker">
+        <button class="color-btn" type="button" aria-label="Выбрать цвет сайта" aria-haspopup="true" aria-expanded="false" title="Цвет сайта"></button>
+        <div class="color-panel" hidden>
+          <p class="title">Цвет сайта</p>
+          <div class="swatches"></div>
+          <span class="color-name"></span>
+        </div>
+      </div>
+      <button class="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="page-hero" style="background-image: linear-gradient(135deg, color-mix(in srgb, var(--blue-900) 94%, transparent), color-mix(in srgb, var(--blue-700) 84%, transparent)), url('../images/hero-products.jpg')">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Главная</a> / Онлайн-заказ</div>
+      <h1>Онлайн-заказ</h1>
+      <p>Выберите товары и количество — менеджер перезвонит и подтвердит заказ</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container order-layout">
+      <div>
+        <div class="filters order-filters" data-order-filter>
+          <button class="filter active" data-filter="all">Все</button>
+          <button class="filter" data-filter="margarin">Маргарины и спреды</button>
+          <button class="filter" data-filter="bulut">Bulut</button>
+        </div>
+        <div id="order-products" class="order-products"></div>
+      </div>
+
+      <aside class="order-side" id="savat">
+        <div class="card cart">
+          <h3>Корзина</h3>
+          <ul id="cart-lines" class="cart-lines"></ul>
+          <div class="cart-total"><span>Итого</span><strong id="cart-total">0 сум</strong></div>
+          <p id="cart-note" class="cart-note" hidden>Цена некоторых товаров согласовывается с менеджером.</p>
+        </div>
+
+        <form id="order-form" class="form card" novalidate>
+          <h3>Покупатель</h3>
+          <div><label for="o-name">Ваше имя *</label><input id="o-name" name="name" maxlength="60" autocomplete="name" required></div>
+          <div><label for="o-phone">Телефон *</label><input id="o-phone" name="phone" type="tel" maxlength="20" placeholder="+998" autocomplete="tel" required></div>
+          <div><label for="o-type">Кто вы</label>
+            <select id="o-type" name="type">
+              <option>Частный покупатель</option>
+              <option>Магазин / супермаркет</option>
+              <option>Кафе / ресторан</option>
+              <option>Пекарня / кондитерская</option>
+              <option>Дистрибьютор</option>
+              <option>Другое</option>
+            </select>
+          </div>
+          <div><label for="o-address">Адрес (район, улица)</label><input id="o-address" name="address" maxlength="200" autocomplete="street-address" placeholder="например, Чиланзар, 9-й квартал"></div>
+          <div><label for="o-comment">Комментарий</label><textarea id="o-comment" name="comment" maxlength="500" placeholder="Время доставки, дополнительные пожелания..."></textarea></div>
+          <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+          <button class="btn btn-primary" type="submit">Оформить заказ</button>
+          <p class="order-hint">Цены могут быть ориентировочными — окончательную цену и условия доставки подтверждает менеджер.</p>
+          <div class="form-note" role="status"></div>
+        </form>
+      </aside>
+    </div>
+  </section>
+
+  <a href="#savat" class="cart-bar" hidden>🛒 Корзина: <span class="count">0</span> · <span class="sum">0 сум</span> →</a>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="logo"><span class="logo-mark"><img src="../images/logo-mark.jpg" alt=""></span><span><b>ABERNO</b><small>GROUP</small></span></a>
+          <p>Узбекская компания — производитель маргаринов, спредов, салфеток Bulut и сырья для салфеток.</p>
+        </div>
+        <div>
+          <h4>Продукция</h4>
+          <ul>
+            <li><a href="margarin.html">Маргарины Margaritto</a></li>
+            <li><a href="margarin.html">Спреды Smaylo</a></li>
+            <li><a href="salfetka.html">Салфетки Bulut</a></li>
+            <li><a href="xomashyo.html">Сырьё для салфеток</a></li>
+            <li><a href="horeca.html">Для HoReCa</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Компания</h4>
+          <ul>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="ishlab-chiqarish.html">Производство</a></li>
+            <li><a href="savdo.html">Отдел продаж</a></li>
+            <li><a href="buyurtma.html">Онлайн-заказ</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Контакты</h4>
+          <ul>
+            <li>📍 г. Ташкент, Яшнабадский район, ул. Уйсозлар, 72</li>
+            <li><a href="tel:+998953427070">📞 +998 95 342 70 70</a></li>
+            <li><a href="tel:+998712300900">📞 +998 71 230 09 00</a></li>
+            <li><a href="https://t.me/aberno_uz" target="_blank" rel="noopener">Telegram: @aberno_uz</a></li>
+            <li><a href="https://instagram.com/aberno.uz" target="_blank" rel="noopener">Instagram: @aberno.uz</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year></span> Aberno Group. Все права защищены.</span>
+        <span>aberno.uz</span>
+      </div>
+    </div>
+  </footer>
+
+  <button class="to-top" aria-label="Наверх">↑</button>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/products.js"></script>
+  <script src="../js/order.js"></script>
+</body>
+</html>

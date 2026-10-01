@@ -5,10 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!list) return;
 
   const MAX_QTY = 999;
+  const IMG_BASE = LANG === "uz" ? "" : "../"; // ru/ va en/ sahifalari bir papka ichkarida
   const variants = new Map(); // variant id -> { product, variant }
   PRODUCTS.forEach((p) => p.variants.forEach((v) => variants.set(v.id, { product: p, variant: v })));
 
-  const money = (n) => n.toLocaleString("ru-RU").replace(/\s/g, " ") + " so'm";
+  const money = (n) => n.toLocaleString("ru-RU").replace(/\s/g, " ") + " " + t("so'm");
+  const callUs = t("qo'ng'iroq qiling:") + ' <a href="tel:+998953427070"><b>+998 95 342 70 70</b></a>';
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
   // Savat: { variantId: qty }, brauzerda saqlanadi
@@ -20,21 +22,21 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Mahsulotlar ro'yxati ---
   list.innerHTML = PRODUCTS.map((p) => `
     <article class="order-card" data-group="${p.group}">
-      <div class="order-img"><img src="${p.img}" alt="${esc(p.name)}" loading="lazy"></div>
+      <div class="order-img"><img src="${IMG_BASE}${p.img}" alt="${esc(t(p.name))}" loading="lazy"></div>
       <div class="order-info">
         <span class="tag">${esc(p.brand)}</span>
-        <h3>${esc(p.name)}</h3>
+        <h3>${esc(t(p.name))}</h3>
         <ul class="variants">
           ${p.variants.map((v) => `
           <li>
             <div class="v-text">
-              <span class="v-label">${esc(v.label)}</span>
-              <span class="v-price">${v.price == null ? "Narxi kelishiladi" : money(v.price) + " / " + esc(v.unit)}</span>
+              <span class="v-label">${esc(t(v.label))}</span>
+              <span class="v-price">${v.price == null ? t("Narxi kelishiladi") : money(v.price) + " / " + esc(t(v.unit))}</span>
             </div>
             <div class="stepper" data-id="${v.id}">
-              <button type="button" class="minus" aria-label="Kamaytirish">−</button>
-              <input type="number" inputmode="numeric" min="0" max="${MAX_QTY}" value="${cart[v.id] || 0}" aria-label="${esc(p.name + ", " + v.label)} soni">
-              <button type="button" class="plus" aria-label="Ko'paytirish">+</button>
+              <button type="button" class="minus" aria-label="${t("Kamaytirish")}">−</button>
+              <input type="number" inputmode="numeric" min="0" max="${MAX_QTY}" value="${cart[v.id] || 0}" aria-label="${esc(t(p.name) + ", " + t(v.label) + " " + t("soni"))}">
+              <button type="button" class="plus" aria-label="${t("Ko'paytirish")}">+</button>
             </div>
           </li>`).join("")}
         </ul>
@@ -91,11 +93,11 @@ document.addEventListener("DOMContentLoaded", () => {
     cartLines.innerHTML = items.length
       ? items.map((i) => `
         <li>
-          <div><b>${esc(i.name)}</b><small>${esc(i.variant)} · ${i.qty} ${esc(i.unit)}</small></div>
+          <div><b>${esc(t(i.name))}</b><small>${esc(t(i.variant))} · ${i.qty} ${esc(t(i.unit))}</small></div>
           <span>${i.price == null ? "—" : money(i.price * i.qty)}</span>
-          <button type="button" class="remove" data-id="${i.id}" aria-label="O'chirish">×</button>
+          <button type="button" class="remove" data-id="${i.id}" aria-label="${t("O'chirish")}">×</button>
         </li>`).join("")
-      : `<li class="empty-cart">Savat bo'sh — chapdagi ro'yxatdan mahsulot sonini tanlang.</li>`;
+      : `<li class="empty-cart">${t("Savat bo'sh — chapdagi ro'yxatdan mahsulot sonini tanlang.")}</li>`;
     cartTotal.textContent = money(total);
     cartNote.hidden = !unpriced;
 
@@ -123,22 +125,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = Object.fromEntries(new FormData(form));
     const digits = (data.phone || "").replace(/\D/g, "");
 
-    if (!items.length) return showNote("err", "Savat bo'sh. Avval kamida bitta mahsulot sonini tanlang.");
-    if ((data.name || "").trim().length < 2) return showNote("err", "Iltimos, ismingizni kiriting.");
-    if (digits.length < 9 || digits.length > 15) return showNote("err", "Iltimos, telefon raqamingizni to'liq kiriting.");
+    if (!items.length) return showNote("err", t("Savat bo'sh. Avval kamida bitta mahsulot sonini tanlang."));
+    if ((data.name || "").trim().length < 2) return showNote("err", t("Iltimos, ismingizni kiriting."));
+    if (digits.length < 9 || digits.length > 15) return showNote("err", t("Iltimos, telefon raqamingizni to'liq kiriting."));
     if (!ORDER_ENDPOINT) {
-      return showNote("err", "Onlayn buyurtma hozircha ulanmagan. Iltimos, qo'ng'iroq qiling: <a href=\"tel:+998953427070\"><b>+998 95 342 70 70</b></a>");
+      return showNote("err", t("Onlayn buyurtma hozircha ulanmagan. Iltimos,") + " " + callUs);
     }
 
     const payload = {
       name: data.name.trim(), phone: data.phone.trim(), type: data.type || "", address: (data.address || "").trim(),
-      comment: (data.comment || "").trim(), website: data.website || "", // website — botlar uchun tuzoq, odam ko'rmaydi
+      comment: ((LANG !== "uz" ? `[${LANG.toUpperCase()}] ` : "") + (data.comment || "")).trim(), website: data.website || "", // website — botlar uchun tuzoq, odam ko'rmaydi
       items: items.map(({ id, name, variant, unit, price, qty }) => ({ id, name, variant, unit, price, qty })),
     };
 
     submit.disabled = true;
     const label = submit.textContent;
-    submit.textContent = "Yuborilmoqda…";
+    submit.textContent = t("Yuborilmoqda…");
     try {
       // Content-Type ko'rsatilmaydi (text/plain) — Google Apps Script CORS preflight'siz qabul qiladi
       const res = await fetch(ORDER_ENDPOINT, { method: "POST", body: JSON.stringify(payload) });
@@ -149,9 +151,9 @@ document.addEventListener("DOMContentLoaded", () => {
       list.querySelectorAll(".stepper input").forEach((i) => (i.value = 0));
       renderCart();
       form.reset();
-      showNote("ok", `Rahmat! Buyurtmangiz qabul qilindi${out.id ? ` (№ ${esc(out.id)})` : ""}. Menejerimiz tez orada siz bilan bog'lanadi.`);
+      showNote("ok", `${t("Rahmat! Buyurtmangiz qabul qilindi")}${out.id ? ` (№ ${esc(out.id)})` : ""}. ${t("Menejerimiz tez orada siz bilan bog'lanadi.")}`);
     } catch (err) {
-      showNote("err", "Buyurtmani yuborib bo'lmadi. Iltimos, qayta urinib ko'ring yoki qo'ng'iroq qiling: <a href=\"tel:+998953427070\"><b>+998 95 342 70 70</b></a>");
+      showNote("err", t("Buyurtmani yuborib bo'lmadi. Iltimos, qayta urinib ko'ring yoki") + " " + callUs);
     } finally {
       submit.disabled = false;
       submit.textContent = label;

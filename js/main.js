@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const root = document.documentElement;
     const syncLabel = () => {
       const dark = root.dataset.theme === "dark";
-      themeBtn.setAttribute("aria-label", dark ? "Yorug' rejimni yoqish" : "Qorong'u rejimni yoqish");
+      themeBtn.setAttribute("aria-label", t(dark ? "Yorug' rejimni yoqish" : "Qorong'u rejimni yoqish"));
       themeBtn.setAttribute("aria-pressed", dark);
     };
     syncLabel();
@@ -55,15 +55,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const mark = () => {
       box.querySelectorAll(".swatch").forEach((s) => s.setAttribute("aria-pressed", s.dataset.color === current()));
-      nameEl.textContent = COLORS.find((c) => c[0] === current())?.[1] || "";
+      nameEl.textContent = t(COLORS.find((c) => c[0] === current())?.[1] || "");
     };
     COLORS.forEach(([id, name]) => {
       const s = document.createElement("button");
       s.type = "button";
       s.className = "swatch";
       s.dataset.color = id;
-      s.title = name;
-      s.setAttribute("aria-label", name);
+      s.title = t(name);
+      s.setAttribute("aria-label", t(name));
       s.addEventListener("click", () => {
         if (id === "aberno") delete root.dataset.color;
         else root.dataset.color = id;
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const note = form.querySelector(".form-note");
     const submit = form.querySelector("button[type=submit]");
     const show = (cls, html) => { note.className = "form-note " + cls; note.innerHTML = html; };
-    const callUs = 'qo\'ng\'iroq qiling: <a href="tel:+998953427070"><b>+998 95 342 70 70</b></a>';
+    const callUs = t("qo'ng'iroq qiling:") + ' <a href="tel:+998953427070"><b>+998 95 342 70 70</b></a>';
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -156,9 +156,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const name = (data.get("name") || "").trim();
       const phone = (data.get("phone") || "").trim();
       const digits = phone.replace(/\D/g, "");
-      if (name.length < 2) return show("err", "Iltimos, ismingizni kiriting.");
-      if (digits.length < 9 || digits.length > 15) return show("err", "Iltimos, telefon raqamingizni to'liq kiriting.");
-      if (!ORDER_ENDPOINT) return show("err", "Xabar yuborish hozircha ulanmagan. Iltimos, " + callUs);
+      if (name.length < 2) return show("err", t("Iltimos, ismingizni kiriting."));
+      if (digits.length < 9 || digits.length > 15) return show("err", t("Iltimos, telefon raqamingizni to'liq kiriting."));
+      if (!ORDER_ENDPOINT) return show("err", t("Xabar yuborish hozircha ulanmagan. Iltimos,") + " " + callUs);
 
       // Qolgan to'ldirilgan maydonlar Telegram xabarida o'z yorlig'i bilan chiqadi
       const fields = [];
@@ -167,20 +167,21 @@ document.addEventListener("DOMContentLoaded", () => {
         const label = el.closest("div")?.querySelector("label")?.textContent.trim() || el.name;
         fields.push([label, el.value.trim()]);
       });
+      if (LANG !== "uz") fields.push(["Til", LANG.toUpperCase()]); // menejer qaysi tilda javob berishni bilsin
       const payload = { kind: "contact", form: form.dataset.form, name, phone, website: data.get("website") || "", fields };
 
       submit.disabled = true;
       const label = submit.textContent;
-      submit.textContent = "Yuborilmoqda…";
+      submit.textContent = t("Yuborilmoqda…");
       try {
         // Content-Type ko'rsatilmaydi (text/plain) — Google Apps Script CORS preflight'siz qabul qiladi
         const res = await fetch(ORDER_ENDPOINT, { method: "POST", body: JSON.stringify(payload) });
         const out = await res.json();
         if (!out.ok) throw new Error(out.error || "server");
-        show("ok", "Rahmat! Xabaringiz yuborildi. Tez orada siz bilan bog'lanamiz.");
+        show("ok", t("Rahmat! Xabaringiz yuborildi. Tez orada siz bilan bog'lanamiz."));
         form.reset();
       } catch (err) {
-        show("err", "Xabarni yuborib bo'lmadi. Iltimos, qayta urinib ko'ring yoki " + callUs);
+        show("err", t("Xabarni yuborib bo'lmadi. Iltimos, qayta urinib ko'ring yoki") + " " + callUs);
       } finally {
         submit.disabled = false;
         submit.textContent = label;
