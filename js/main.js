@@ -1,4 +1,8 @@
 // ===== Aberno — umumiy skriptlar =====
+
+// Google Apps Script "Web app" manzili: saytdagi barcha formalar va buyurtmalar shu orqali
+// Telegram botga yuboriladi (google-apps-script/SOZLASH.md). Bo'sh bo'lsa, formalar yubormaydi.
+const ORDER_ENDPOINT = "https://script.google.com/macros/s/AKfycbzhylnFwo2DfRcw9pyeWNR4SSMcJigAy2cOitZRZQAYCu5Hyn3Bnods3IytHcvqGwZx/exec";
 document.addEventListener("DOMContentLoaded", () => {
   // Mobil menyu
   const burger = document.querySelector(".burger");
@@ -139,20 +143,48 @@ document.addEventListener("DOMContentLoaded", () => {
     toTop.addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
   }
 
-  // Formalar (backend ulanmaguncha faqat tekshiruv va xabar; buyurtma formasi — js/order.js)
-  document.querySelectorAll("form.form:not(#order-form)").forEach((form) => {
-    form.addEventListener("submit", (e) => {
+  // Bog'lanish / Savdo / Xomashyo formalari -> Telegram bot (buyurtma formasi — js/order.js)
+  document.querySelectorAll("form.form[data-form]").forEach((form) => {
+    const note = form.querySelector(".form-note");
+    const submit = form.querySelector("button[type=submit]");
+    const show = (cls, html) => { note.className = "form-note " + cls; note.innerHTML = html; };
+    const callUs = 'qo\'ng\'iroq qiling: <a href="tel:+998953427070"><b>+998 95 342 70 70</b></a>';
+
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const note = form.querySelector(".form-note");
-      const phone = form.querySelector("[name=phone]");
-      if (phone && phone.value.replace(/\D/g, "").length < 9) {
-        note.className = "form-note err";
-        note.textContent = "Iltimos, telefon raqamingizni to'liq kiriting.";
-        return;
+      const data = new FormData(form);
+      const name = (data.get("name") || "").trim();
+      const phone = (data.get("phone") || "").trim();
+      const digits = phone.replace(/\D/g, "");
+      if (name.length < 2) return show("err", "Iltimos, ismingizni kiriting.");
+      if (digits.length < 9 || digits.length > 15) return show("err", "Iltimos, telefon raqamingizni to'liq kiriting.");
+      if (!ORDER_ENDPOINT) return show("err", "Xabar yuborish hozircha ulanmagan. Iltimos, " + callUs);
+
+      // Qolgan to'ldirilgan maydonlar Telegram xabarida o'z yorlig'i bilan chiqadi
+      const fields = [];
+      form.querySelectorAll("input[name], select[name], textarea[name]").forEach((el) => {
+        if (["name", "phone", "website"].includes(el.name) || !el.value.trim()) return;
+        const label = el.closest("div")?.querySelector("label")?.textContent.trim() || el.name;
+        fields.push([label, el.value.trim()]);
+      });
+      const payload = { kind: "contact", form: form.dataset.form, name, phone, website: data.get("website") || "", fields };
+
+      submit.disabled = true;
+      const label = submit.textContent;
+      submit.textContent = "Yuborilmoqda…";
+      try {
+        // Content-Type ko'rsatilmaydi (text/plain) — Google Apps Script CORS preflight'siz qabul qiladi
+        const res = await fetch(ORDER_ENDPOINT, { method: "POST", body: JSON.stringify(payload) });
+        const out = await res.json();
+        if (!out.ok) throw new Error(out.error || "server");
+        show("ok", "Rahmat! Xabaringiz yuborildi. Tez orada siz bilan bog'lanamiz.");
+        form.reset();
+      } catch (err) {
+        show("err", "Xabarni yuborib bo'lmadi. Iltimos, qayta urinib ko'ring yoki " + callUs);
+      } finally {
+        submit.disabled = false;
+        submit.textContent = label;
       }
-      note.className = "form-note ok";
-      note.textContent = "Rahmat! So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz.";
-      form.reset();
     });
   });
 

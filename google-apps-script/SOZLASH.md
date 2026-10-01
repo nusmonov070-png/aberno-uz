@@ -63,8 +63,8 @@ Telegram'ga "Yangi buyurtma № 0 … Bu sinov xabari" kelsa, hammasi to'g'ri ul
    - Who has access: **Anyone**
 4. **Deploy** → **Web app URL** ni nusxalang (`https://script.google.com/macros/s/.../exec`).
 
-Bu manzil maxfiy emas, uni bemalol menga yuborishingiz mumkin. U `js/products.js` faylidagi
-`ORDER_ENDPOINT` ga yoziladi va shundan keyin saytdagi buyurtmalar botingizga kela boshlaydi.
+Bu manzil maxfiy emas, uni bemalol menga yuborishingiz mumkin. U `js/main.js` faylidagi
+`ORDER_ENDPOINT` ga yoziladi va shundan keyin saytdagi buyurtmalar va formalar botingizga kela boshlaydi.
 
 ---
 

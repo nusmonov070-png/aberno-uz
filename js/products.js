@@ -1,8 +1,4 @@
-// ===== Onlayn buyurtma: sozlamalar va mahsulotlar ro'yxati =====
-
-// Google Apps Script "Web app" manzili (SOZLASH.md, 4-qadam). Bo'sh bo'lsa, forma
-// buyurtma yubormaydi va mijozga qo'ng'iroq qilishni taklif qiladi.
-const ORDER_ENDPOINT = "https://script.google.com/macros/s/AKfycbzhylnFwo2DfRcw9pyeWNR4SSMcJigAy2cOitZRZQAYCu5Hyn3Bnods3IytHcvqGwZx/exec";
+// ===== Onlayn buyurtma: mahsulotlar ro'yxati (Telegram manzili — js/main.js, ORDER_ENDPOINT) =====
 
 // Narxlar so'mda, bitta "unit" uchun (masalan 1 quti). HOZIRCHA TAXMINIY — haqiqiy narxlarni shu yerga yozing.
 // null — narxi kelishiladi (savatda "Narxi kelishiladi" deb chiqadi).

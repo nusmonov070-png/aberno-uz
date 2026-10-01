@@ -98,7 +98,7 @@
         <p>Formani to'ldiring — mutaxassisimiz ish kuni davomida siz bilan bog'lanadi.</p>
         <p style="margin-top:14px">Yoki qo'ng'iroq qiling: <a href="tel:+998953427070"><b>+998 95 342 70 70</b></a></p>
       </div>
-      <form class="form reveal">
+      <form class="form reveal" data-form="Xomashyo so'rovi" novalidate>
         <div class="form-row">
           <div><label>Korxona nomi</label><input name="company" required></div>
           <div><label>Mas'ul shaxs</label><input name="name" required></div>
@@ -108,6 +108,7 @@
           <div><label>Oylik hajm (taxminan)</label><input name="volume" placeholder="masalan, 5 tonna"></div>
         </div>
         <div><label>Izoh</label><textarea name="message" placeholder="Qanday xomashyo kerak?"></textarea></div>
+          <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
         <button class="btn btn-primary" type="submit">Yuborish</button>
         <div class="form-note"></div>
       </form>

@@ -1,5 +1,5 @@
 // ===== Onlayn buyurtma sahifasi (buyurtma.html) =====
-// Mahsulotlar va ORDER_ENDPOINT — js/products.js da.
+// Mahsulotlar — js/products.js, ORDER_ENDPOINT — js/main.js da.
 document.addEventListener("DOMContentLoaded", () => {
   const list = document.getElementById("order-products");
   if (!list) return;

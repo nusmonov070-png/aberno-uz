@@ -1,5 +1,5 @@
 /**
- * Aberno — onlayn buyurtmalarni Telegram botga yuboruvchi Google Apps Script.
+ * Aberno — onlayn buyurtmalar va sayt formalarini Telegram botga yuboruvchi Google Apps Script.
  *
  * Bu faylda hech qanday maxfiy ma'lumot yo'q. Bot tokeni va chat ID
  * "Project Settings → Script properties" da saqlanadi (SOZLASH.md ga qarang):
@@ -21,21 +21,23 @@ function doPost(e) {
     // Botlar uchun tuzoq: odam bu maydonni ko'rmaydi. To'lgan bo'lsa — jimgina "ok" qaytaramiz.
     if (data.website) return reply_({ ok: true });
 
-    const order = validate_(data);
-    if (!order) return reply_({ ok: false, error: "invalid" });
+    // kind: "contact" — Bog'lanish / Savdo / Xomashyo formalari; aks holda — onlayn buyurtma
+    const isContact = data.kind === "contact";
+    const msg = isContact ? validateContact_(data) : validate_(data);
+    if (!msg) return reply_({ ok: false, error: "invalid" });
 
     const cache = CacheService.getScriptCache();
-    const phoneKey = "phone:" + order.phoneDigits;
+    const phoneKey = "phone:" + msg.phoneDigits;
     if (cache.get(phoneKey)) return reply_({ ok: false, error: "too_fast" });
     const count = Number(cache.get("global") || 0);
     if (count >= GLOBAL_LIMIT) return reply_({ ok: false, error: "busy" });
 
-    const id = nextOrderId_();
-    sendTelegram_(formatMessage_(id, order));
+    const id = isContact ? null : nextOrderId_();
+    sendTelegram_(isContact ? formatContact_(msg) : formatMessage_(id, msg));
 
     cache.put(phoneKey, "1", PHONE_COOLDOWN_SEC);
     cache.put("global", String(count + 1), GLOBAL_WINDOW_SEC);
-    return reply_({ ok: true, id: String(id) });
+    return reply_(id === null ? { ok: true } : { ok: true, id: String(id) });
   } catch (err) {
     console.error(err);
     return reply_({ ok: false, error: "server" });
@@ -70,6 +72,38 @@ function validate_(d) {
     address: str(d.address, 200),
     comment: str(d.comment, 500),
   };
+}
+
+function validateContact_(d) {
+  const str = (v, max) => (typeof v === "string" ? v.trim().slice(0, max) : "");
+  const name = str(d.name, 60);
+  const phone = str(d.phone, 20);
+  const phoneDigits = phone.replace(/\D/g, "");
+  if (name.length < 2 || phoneDigits.length < 9 || phoneDigits.length > 15) return null;
+  if (d.fields !== undefined && (!Array.isArray(d.fields) || d.fields.length > 8)) return null;
+  const fields = [];
+  for (const f of d.fields || []) {
+    if (!Array.isArray(f) || f.length !== 2) return null;
+    const label = str(f[0], 40);
+    const value = str(f[1], 500);
+    if (label && value) fields.push([label, value]);
+  }
+  return { form: str(d.form, 40) || "Sayt", name, phone, phoneDigits, fields };
+}
+
+function formatContact_(m) {
+  const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const time = Utilities.formatDate(new Date(), "Asia/Tashkent", "dd.MM.yyyy HH:mm");
+  const parts = [
+    `✉️ <b>Yangi xabar — ${esc(m.form)}</b>`,
+    `🕒 ${time}`,
+    "",
+    `👤 ${esc(m.name)}`,
+    `📞 ${esc(m.phone)}`,
+    "",
+    m.fields.map(([k, v]) => `<b>${esc(k)}:</b> ${esc(v)}`).join("\n"),
+  ];
+  return parts.join("\n").replace(/\n{3,}/g, "\n\n").trim().slice(0, 4000);
 }
 
 function nextOrderId_() {

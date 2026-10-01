@@ -119,7 +119,7 @@
         <p>Ariza qoldiring — savdo bo'limimiz siz bilan bog'lanadi yoki savdo agenti tashrif buyuradi.</p>
         <p style="margin-top:14px">Savdo bo'limi: <a href="tel:+998953427070"><b>+998 95 342 70 70</b></a></p>
       </div>
-      <form class="form reveal">
+      <form class="form reveal" data-form="Savdo bo'limi" novalidate>
         <div class="form-row">
           <div><label>Ismingiz</label><input name="name" required></div>
           <div><label>Telefon</label><input name="phone" type="tel" placeholder="+998" required></div>
@@ -137,6 +137,7 @@
           <div><label>Tuman / viloyat</label><input name="region" placeholder="masalan, Chilonzor"></div>
         </div>
         <div><label>Qiziqtirgan mahsulotlar</label><textarea name="message" placeholder="Margarin, spred, Bulut salfetka..."></textarea></div>
+          <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
         <button class="btn btn-primary" type="submit">Ariza yuborish</button>
         <div class="form-note"></div>
       </form>
