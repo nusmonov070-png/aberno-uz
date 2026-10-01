@@ -3,6 +3,11 @@
 // Google Apps Script "Web app" manzili: saytdagi barcha formalar va buyurtmalar shu orqali
 // Telegram botga yuboriladi (google-apps-script/SOZLASH.md). Bo'sh bo'lsa, formalar yubormaydi.
 const ORDER_ENDPOINT = "https://script.google.com/macros/s/AKfycbzhylnFwo2DfRcw9pyeWNR4SSMcJigAy2cOitZRZQAYCu5Hyn3Bnods3IytHcvqGwZx/exec";
+
+// Google Analytics hodisasi (gtag sahifada bo'lmasa — jim o'tib ketadi)
+function track(name, params) {
+  try { if (window.gtag) window.gtag("event", name, params || {}); } catch (e) {}
+}
 document.addEventListener("DOMContentLoaded", () => {
   // Mobil menyu
   const burger = document.querySelector(".burger");
@@ -179,6 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const out = await res.json();
         if (!out.ok) throw new Error(out.error || "server");
         show("ok", t("Rahmat! Xabaringiz yuborildi. Tez orada siz bilan bog'lanamiz."));
+        track("generate_lead", { form_name: form.dataset.form, language: LANG });
         form.reset();
       } catch (err) {
         show("err", t("Xabarni yuborib bo'lmadi. Iltimos, qayta urinib ko'ring yoki") + " " + callUs);
@@ -235,6 +241,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === "Escape" && !fcPanel.hidden) { setFc(false); fcBtn.focus(); }
     });
   }
+
+  // Telefon, Telegram, WhatsApp havolalari bosilishi
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[href]");
+    if (!a) return;
+    const h = a.getAttribute("href");
+    const method = h.startsWith("tel:") ? "phone" : /t\.me\//.test(h) ? "telegram" : /wa\.me\//.test(h) ? "whatsapp" : /instagram\.com\//.test(h) ? "instagram" : "";
+    if (method) track("contact_click", { method, link_url: h });
+  });
 
   // Yil
   document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));

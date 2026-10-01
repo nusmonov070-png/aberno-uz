@@ -15,6 +15,7 @@ import re
 import sys
 
 BASE_URL = "https://nusmonov070-png.github.io/aberno-uz/"
+GA_ID = "G-RJJC2WB937"  # Google Analytics 4 (nusmonov070@gmail.com, "Aberno Group" hisobi)
 LANGS = ["ru", "en"]
 LANG_NAMES = {"uz": "UZ", "ru": "RU", "en": "EN"}
 
@@ -225,6 +226,10 @@ def seo_block(html, page, lang):
             "brand": [{"@type": "Brand", "name": n} for n in ("Margaritto", "Smaylo", "Bulut")],
         }
         tags.append('<script type="application/ld+json">' + json.dumps(org, ensure_ascii=False) + "</script>")
+    if GA_ID:
+        tags.append(f'<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>')
+        tags.append("<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}"
+                    f"gtag('js',new Date());gtag('config','{GA_ID}');</script>")
     block = "<!--seo-->\n  " + "\n  ".join(tags) + "\n  <!--/seo-->"
     html = re.sub(r"\n?\s*<!--seo-->.*?<!--/seo-->", "", html, flags=re.S)
     html = re.sub(r'\n\s*<link rel="icon" href="[^"]*logo-mark[^"]*">', "", html)

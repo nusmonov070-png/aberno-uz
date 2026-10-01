@@ -151,6 +151,11 @@ document.addEventListener("DOMContentLoaded", () => {
       list.querySelectorAll(".stepper input").forEach((i) => (i.value = 0));
       renderCart();
       form.reset();
+      track("generate_lead", {
+        form_name: "Onlayn buyurtma", language: LANG, currency: "UZS",
+        value: payload.items.reduce((s, i) => s + (i.price || 0) * i.qty, 0),
+        items_count: payload.items.length,
+      });
       showNote("ok", `${t("Rahmat! Buyurtmangiz qabul qilindi")}${out.id ? ` (№ ${esc(out.id)})` : ""}. ${t("Menejerimiz tez orada siz bilan bog'lanadi.")}`);
     } catch (err) {
       showNote("err", t("Buyurtmani yuborib bo'lmadi. Iltimos, qayta urinib ko'ring yoki") + " " + callUs);
