@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Онлайн-заказ — Aberno Group</title>
-  <meta name="description" content="Закажите маргарины Margaritto, Smaylo и салфетки Bulut онлайн — наш менеджер скоро свяжется с вами.">
+  <title>Новости — Aberno Group</title>
+  <meta name="description" content="Новости Aberno Group, Margaritto, Smaylo и Bulut.">
   <link rel="icon" href="../images/logo-mark.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script>try{var d=document.documentElement,t=localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"),c=localStorage.getItem("color");if(t==="dark")d.dataset.theme="dark";if(c&&c!=="aberno")d.dataset.color=c}catch(e){}</script>
-  <link rel="alternate" hreflang="uz" href="https://nusmonov070-png.github.io/aberno-uz/buyurtma.html">
-  <link rel="alternate" hreflang="ru" href="https://nusmonov070-png.github.io/aberno-uz/ru/buyurtma.html">
-  <link rel="alternate" hreflang="en" href="https://nusmonov070-png.github.io/aberno-uz/en/buyurtma.html">
+  <link rel="alternate" hreflang="uz" href="https://nusmonov070-png.github.io/aberno-uz/yangiliklar.html">
+  <link rel="alternate" hreflang="ru" href="https://nusmonov070-png.github.io/aberno-uz/ru/yangiliklar.html">
+  <link rel="alternate" hreflang="en" href="https://nusmonov070-png.github.io/aberno-uz/en/yangiliklar.html">
   <link rel="stylesheet" href="../css/style.css?v=257890af">
 </head>
 <body>
@@ -20,7 +20,7 @@
     <div class="container">
       <span class="hide-sm">📍 г. Ташкент, Яшнабадский район, ул. Уйсозлар, 72</span>
       <span><a href="tel:+998953427070">📞 +998 95 342 70 70</a> &nbsp;|&nbsp; <a href="tel:+998712300900">+998 71 230 09 00</a></span>
-      <nav class="lang-switch" aria-label="Til / Язык / Language"><a href="../buyurtma.html" hreflang="uz">UZ</a><a href="buyurtma.html" hreflang="ru" class="active" aria-current="true">RU</a><a href="../en/buyurtma.html" hreflang="en">EN</a></nav>
+      <nav class="lang-switch" aria-label="Til / Язык / Language"><a href="../yangiliklar.html" hreflang="uz">UZ</a><a href="yangiliklar.html" hreflang="ru" class="active" aria-current="true">RU</a><a href="../en/yangiliklar.html" hreflang="en">EN</a></nav>
     </div>
   </div>
 
@@ -54,59 +54,42 @@
     </div>
   </header>
 
-  <section class="page-hero" style="background-image: linear-gradient(135deg, color-mix(in srgb, var(--blue-900) 94%, transparent), color-mix(in srgb, var(--blue-700) 84%, transparent)), url('../images/hero-products.jpg')">
+  <section class="page-hero" style="background-image: linear-gradient(135deg, color-mix(in srgb, var(--blue-900) 94%, transparent), color-mix(in srgb, var(--blue-700) 84%, transparent)), url('../images/factory.jpg')">
     <div class="container">
-      <div class="breadcrumb"><a href="index.html">Главная</a> / Онлайн-заказ</div>
-      <h1>Онлайн-заказ</h1>
-      <p>Выберите товары и количество — менеджер перезвонит и подтвердит заказ</p>
+      <div class="breadcrumb"><a href="index.html">Главная</a> / Новости</div>
+      <h1>Новости</h1>
+      <p>Из жизни Aberno Group, Margaritto, Smaylo и Bulut</p>
     </div>
   </section>
 
   <section class="section">
-    <div class="container order-layout">
-      <div>
-        <div class="filters order-filters" data-order-filter>
-          <button class="filter active" data-filter="all">Все</button>
-          <button class="filter" data-filter="margarin">Маргарины и спреды</button>
-          <button class="filter" data-filter="bulut">Bulut</button>
-        </div>
-        <div id="order-products" class="order-products"></div>
-      </div>
-
-      <aside class="order-side" id="savat">
-        <div class="card cart">
-          <h3>Корзина</h3>
-          <ul id="cart-lines" class="cart-lines"></ul>
-          <div class="cart-total"><span>Итого</span><strong id="cart-total">0 сум</strong></div>
-          <p id="cart-note" class="cart-note" hidden>Цена некоторых товаров согласовывается с менеджером.</p>
-        </div>
-
-        <form id="order-form" class="form card" novalidate>
-          <h3>Покупатель</h3>
-          <div><label for="o-name">Ваше имя *</label><input id="o-name" name="name" maxlength="60" autocomplete="name" required></div>
-          <div><label for="o-phone">Телефон *</label><input id="o-phone" name="phone" type="tel" maxlength="20" placeholder="+998" autocomplete="tel" required></div>
-          <div><label for="o-type">Кто вы</label>
-            <select id="o-type" name="type">
-              <option>Частный покупатель</option>
-              <option>Магазин / супермаркет</option>
-              <option>Кафе / ресторан</option>
-              <option>Пекарня / кондитерская</option>
-              <option>Дистрибьютор</option>
-              <option>Другое</option>
-            </select>
-          </div>
-          <div><label for="o-address">Адрес (район, улица)</label><input id="o-address" name="address" maxlength="200" autocomplete="street-address" placeholder="например, Чиланзар, 9-й квартал"></div>
-          <div><label for="o-comment">Комментарий</label><textarea id="o-comment" name="comment" maxlength="500" placeholder="Время доставки, дополнительные пожелания..."></textarea></div>
-          <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
-          <button class="btn btn-primary" type="submit">Оформить заказ</button>
-          <p class="order-hint">Цены могут быть ориентировочными — окончательную цену и условия доставки подтверждает менеджер.</p>
-          <div class="form-note" role="status"></div>
-        </form>
-      </aside>
+    <div class="container news-list">
+      <!-- Yangi yangilik qo'shish uchun shu namunadan nusxa oling va eng tepaga qo'ying:
+      <article class="news-item reveal">
+        <time datetime="2026-10-01">1-oktabr, 2026</time>
+        <h2>Sarlavha</h2>
+        <p>Matn.</p>
+      </article>
+      -->
+      <article class="news-item reveal">
+        <time datetime="2026-10-01">1 октября 2026</time>
+        <h2>Запущен онлайн-заказ</h2>
+        <p>Теперь продукцию Margaritto, Smaylo и Bulut можно заказать прямо на сайте: выберите товар и количество, посмотрите итоговую сумму в корзине и отправьте заказ — менеджер перезвонит и подтвердит его.</p>
+        <a href="buyurtma.html" class="more">Оформить заказ →</a>
+      </article>
+      <article class="news-item reveal">
+        <time datetime="2026-10-01">1 октября 2026</time>
+        <h2>Сайт теперь на трёх языках</h2>
+        <p>Наш сайт работает на узбекском, русском и английском языках. Переключайте язык кнопками UZ / RU / EN в самом верху страницы.</p>
+      </article>
+      <article class="news-item reveal">
+        <time datetime="2026-10-01">1 октября 2026</time>
+        <h2>Раздел HoReCa для кафе, ресторанов и офисов</h2>
+        <p>Салфетки для диспенсеров, полотенца и оптовые маргарины теперь на одной странице. Оставьте заявку, чтобы получить предложение для вашего заведения.</p>
+        <a href="horeca.html" class="more">Раздел HoReCa →</a>
+      </article>
     </div>
   </section>
-
-  <a href="#savat" class="cart-bar" hidden>🛒 Корзина: <span class="count">0</span> · <span class="sum">0 сум</span> →</a>
 
   <footer class="footer">
     <div class="container">
@@ -179,7 +162,5 @@
   <button class="to-top" aria-label="Наверх">↑</button>
   <script src="../js/i18n.js?v=99193a51"></script>
   <script src="../js/main.js?v=1defa108"></script>
-  <script src="../js/products.js?v=8953b4c4"></script>
-  <script src="../js/order.js?v=a83fe746"></script>
 </body>
 </html>

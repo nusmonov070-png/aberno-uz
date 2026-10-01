@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Рецепты — с Margaritto и Smaylo | Aberno</title>
+  <meta name="description" content="Рецепты самсы, «Наполеона», круассанов, маффинов, булочек и чебуреков — с указанием подходящих продуктов Margaritto и Smaylo.">
+  <link rel="icon" href="../images/logo-mark.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>try{var d=document.documentElement,t=localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"),c=localStorage.getItem("color");if(t==="dark")d.dataset.theme="dark";if(c&&c!=="aberno")d.dataset.color=c}catch(e){}</script>
+  <link rel="alternate" hreflang="uz" href="https://nusmonov070-png.github.io/aberno-uz/retseptlar.html">
+  <link rel="alternate" hreflang="ru" href="https://nusmonov070-png.github.io/aberno-uz/ru/retseptlar.html">
+  <link rel="alternate" hreflang="en" href="https://nusmonov070-png.github.io/aberno-uz/en/retseptlar.html">
+  <link rel="stylesheet" href="../css/style.css?v=257890af">
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container">
+      <span class="hide-sm">📍 г. Ташкент, Яшнабадский район, ул. Уйсозлар, 72</span>
+      <span><a href="tel:+998953427070">📞 +998 95 342 70 70</a> &nbsp;|&nbsp; <a href="tel:+998712300900">+998 71 230 09 00</a></span>
+      <nav class="lang-switch" aria-label="Til / Язык / Language"><a href="../retseptlar.html" hreflang="uz">UZ</a><a href="retseptlar.html" hreflang="ru" class="active" aria-current="true">RU</a><a href="../en/retseptlar.html" hreflang="en">EN</a></nav>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo"><span class="logo-mark"><img src="../images/logo-mark.jpg" alt=""></span><span><b>ABERNO</b><small>GROUP</small></span></a>
+      <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="about.html">О нас</a>
+        <a href="margarin.html">Маргарин</a>
+        <a href="salfetka.html">Bulut</a>
+        <a href="xomashyo.html">Сырьё</a>
+        <a href="savdo.html">Продажи</a>
+        <a href="contact.html">Контакты</a>
+        <a href="buyurtma.html" class="btn">🛒 Заказ</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Включить тёмную тему" title="Светлая / тёмная тема">
+        <svg class="ic-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+        <svg class="ic-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+        <span class="knob"></span>
+      </button>
+      <div class="color-picker">
+        <button class="color-btn" type="button" aria-label="Выбрать цвет сайта" aria-haspopup="true" aria-expanded="false" title="Цвет сайта"></button>
+        <div class="color-panel" hidden>
+          <p class="title">Цвет сайта</p>
+          <div class="swatches"></div>
+          <span class="color-name"></span>
+        </div>
+      </div>
+      <button class="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="page-hero" style="background-image: linear-gradient(135deg, color-mix(in srgb, var(--blue-900) 88%, transparent), color-mix(in srgb, var(--blue-700) 70%, transparent)), url('../images/use-croissant.jpg')">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Главная</a> / Рецепты</div>
+      <h1>Рецепты</h1>
+      <p>«Culinary is art» — готовьте с Margaritto и Smaylo дома и в цеху</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <nav class="filters recipe-nav reveal" aria-label="Рецепты">
+        <a class="filter" href="#somsa">Слоёная самса</a>
+        <a class="filter" href="#napoleon">Торт «Наполеон»</a>
+        <a class="filter" href="#kruassan">Круассан</a>
+        <a class="filter" href="#maffin">Шоколадные маффины</a>
+        <a class="filter" href="#bulochka">Молочные булочки</a>
+        <a class="filter" href="#cheburek">Чебуреки</a>
+        <a class="filter" href="#yurakcha">Булочки-сердечки с орехами</a>
+      </nav>
+
+      <article class="recipe reveal" id="somsa">
+        <div class="recipe-head">
+          <div class="recipe-img"><img src="../images/use-samsa.jpg" alt="Слоёная самса" loading="lazy"></div>
+          <div>
+            <span class="eyebrow">Margaritto Pastry 80%</span>
+            <h2>Слоёная самса</h2>
+            <p>Золотистая самса с чётко разделёнными слоями. Специальный маргарин для слоёного теста делает тесто ровным и объёмным.</p>
+            <ul class="recipe-meta"><li>⏱ 2,5 часа</li><li>🍽 12 шт.</li><li>🔥 200°C</li></ul>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div>
+            <h3>Ингредиенты</h3>
+            <ul class="ingredients">
+              <li>Мука — 500 г</li>
+              <li>Вода — 250 мл</li>
+              <li>Соль — 1 ч. л.</li>
+              <li>Margaritto Pastry 80% — 200 g</li>
+              <li>Говядина — 500 г</li>
+              <li>Лук — 3 шт.</li>
+              <li>Зира, чёрный перец, соль — по вкусу</li>
+              <li>Яичный желток и кунжут — для смазки</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Приготовление</h3>
+            <ol class="steps-list">
+              <li>Замесите из муки, воды и соли крутое тесто и дайте ему отдохнуть 30 минут.</li>
+              <li>Тонко раскатайте тесто, смажьте размягчённым маргарином и сверните рулетом. Уберите в холодильник на 1 час.</li>
+              <li>Мелко нарежьте мясо и лук, добавьте специи и соль и перемешайте.</li>
+              <li>Нарежьте рулет на 12 частей, раскатайте каждую, выложите начинку и защипните треугольником.</li>
+              <li>Смажьте желтком, посыпьте кунжутом и выпекайте при 200°C 30–35 минут.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+
+      <article class="recipe reveal" id="napoleon">
+        <div class="recipe-head">
+          <div class="recipe-img"><img src="../images/use-medovik.jpg" alt="Торт «Наполеон»" loading="lazy"></div>
+          <div>
+            <span class="eyebrow">Margaritto Pastry 80% · Margaritto для кремов</span>
+            <h2>Торт «Наполеон»</h2>
+            <p>Хрупкие слоёные коржи и нежный сливочный крем. Для коржей — маргарин для слоёного теста, для крема — специальный маргарин для кремов.</p>
+            <ul class="recipe-meta"><li>⏱ 2 часа + 8 часов настаивания</li><li>🍽 10–12 кусочков</li><li>🔥 200°C</li></ul>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div>
+            <h3>Ингредиенты</h3>
+            <ul class="ingredients">
+              <li><b>Для коржей:</b></li>
+              <li>Мука — 400 г</li>
+              <li>Margaritto Pastry 80% (холодный) — 250 г</li>
+              <li>Яйцо — 1 шт.</li>
+              <li>Холодная вода — 120 мл</li>
+              <li>Уксус — 1 ст. л., соль — щепотка</li>
+              <li><b>Для крема:</b></li>
+              <li>Молоко — 700 мл</li>
+              <li>Сахар — 200 г</li>
+              <li>Яйца — 2 шт., мука — 50 г, ванилин</li>
+              <li>Margaritto 72% для кремов — 150 г</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Приготовление</h3>
+            <ol class="steps-list">
+              <li>Порубите холодный маргарин с мукой ножом до мелкой крошки.</li>
+              <li>Добавьте яйцо, воду, уксус и соль, быстро замесите тесто, разделите на 8 частей и уберите в холодильник на 1 час.</li>
+              <li>Тонко раскатайте каждую часть, наколите вилкой и выпекайте при 200°C 7–8 минут.</li>
+              <li>Сварите молоко, сахар, яйца, муку и ванилин на слабом огне до загустения и остудите. Затем взбейте с маргарином.</li>
+              <li>Промажьте коржи кремом, сложите друг на друга, посыпьте крошкой и оставьте на 8 часов.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+
+      <article class="recipe reveal" id="kruassan">
+        <div class="recipe-head">
+          <div class="recipe-img"><img src="../images/use-croissant.jpg" alt="Круассан" loading="lazy"></div>
+          <div>
+            <span class="eyebrow">Margaritto 80% — для слоёного теста</span>
+            <h2>Круассан</h2>
+            <p>Круассаны, воздушные внутри и хрустящие снаружи. Пласты по 2 кг удобны для ламинации теста.</p>
+            <ul class="recipe-meta"><li>⏱ 5 часов</li><li>🍽 12 шт.</li><li>🔥 200°C</li></ul>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div>
+            <h3>Ингредиенты</h3>
+            <ul class="ingredients">
+              <li>Мука — 500 г</li>
+              <li>Молоко — 250 мл</li>
+              <li>Сахар — 60 г</li>
+              <li>Сухие дрожжи — 10 г</li>
+              <li>Соль — 10 г</li>
+              <li>Яйцо — 1 шт. (+1 для смазки)</li>
+              <li>Margaritto 80% для слоёного теста — 250 г</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Приготовление</h3>
+            <ol class="steps-list">
+              <li>Замесите тесто из муки, молока, сахара, дрожжей, соли и яйца и уберите в холодильник на 1 час.</li>
+              <li>Сформируйте из маргарина пласт 15×15 см и заверните его в раскатанное тесто.</li>
+              <li>Раскатайте тесто в длину и сложите втрое. Повторите 3 раза, каждый раз охлаждая 30 минут.</li>
+              <li>Раскатайте тесто толщиной 4 мм, нарежьте треугольники и сверните их от широкой стороны.</li>
+              <li>Дайте подняться в тёплом месте 1,5–2 часа, смажьте яйцом и выпекайте при 200°C 15–18 минут.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+
+      <article class="recipe reveal" id="maffin">
+        <div class="recipe-head">
+          <div class="recipe-img"><img src="../images/use-muffins.jpg" alt="Шоколадные маффины" loading="lazy"></div>
+          <div>
+            <span class="eyebrow">Smaylo спред 82,5%</span>
+            <h2>Шоколадные маффины</h2>
+            <p>Мягкие и влажные маффины. Спред Smaylo придаёт выпечке сливочный вкус.</p>
+            <ul class="recipe-meta"><li>⏱ 40 минут</li><li>🍽 12 шт.</li><li>🔥 180°C</li></ul>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div>
+            <h3>Ингредиенты</h3>
+            <ul class="ingredients">
+              <li>Мука — 250 г</li>
+              <li>Сахар — 150 г</li>
+              <li>Спред Smaylo (растопленный) — 120 г</li>
+              <li>Яйца — 2 шт.</li>
+              <li>Молоко — 200 мл</li>
+              <li>Какао — 30 г</li>
+              <li>Разрыхлитель — 10 г, соль — щепотка</li>
+              <li>Кусочки шоколада — 100 г</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Приготовление</h3>
+            <ol class="steps-list">
+              <li>Смешайте муку, какао, разрыхлитель и соль.</li>
+              <li>В другой миске смешайте яйца, сахар, молоко и растопленный спред.</li>
+              <li>Соедините обе смеси, добавьте шоколад и слегка перемешайте — тесто не обязательно должно быть гладким.</li>
+              <li>Заполните формочки на 2/3.</li>
+              <li>Выпекайте при 180°C 20–25 минут.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+
+      <article class="recipe reveal" id="bulochka">
+        <div class="recipe-head">
+          <div class="recipe-img"><img src="../images/use-bread.jpg" alt="Молочные булочки" loading="lazy"></div>
+          <div>
+            <span class="eyebrow">Margaritto Universal 80%</span>
+            <h2>Молочные булочки</h2>
+            <p>Мягкие, пышные булочки к завтраку и чаю. Универсальный маргарин хорошо поднимает тесто.</p>
+            <ul class="recipe-meta"><li>⏱ 2,5 часа</li><li>🍽 12 шт.</li><li>🔥 180°C</li></ul>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div>
+            <h3>Ингредиенты</h3>
+            <ul class="ingredients">
+              <li>Мука — 500 г</li>
+              <li>Тёплое молоко — 250 мл</li>
+              <li>Сахар — 70 г</li>
+              <li>Яйцо — 1 шт. (+1 для смазки)</li>
+              <li>Сухие дрожжи — 7 г</li>
+              <li>Соль — 1 ч. л.</li>
+              <li>Margaritto Universal 80% (мягкий) — 70 г</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Приготовление</h3>
+            <ol class="steps-list">
+              <li>Растворите дрожжи и сахар в тёплом молоке и подождите 10 минут.</li>
+              <li>Добавьте муку, яйцо, соль и маргарин и месите мягкое тесто 10 минут.</li>
+              <li>Накройте тесто и оставьте подниматься в тёплом месте на 1 час.</li>
+              <li>Сформируйте 12 круглых булочек и дайте им подняться ещё 40 минут.</li>
+              <li>Смажьте яйцом и выпекайте при 180°C 20–25 минут.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+
+      <article class="recipe reveal" id="cheburek">
+        <div class="recipe-head">
+          <div class="recipe-img recipe-emoji" aria-hidden="true">🥟</div>
+          <div>
+            <span class="eyebrow">Margaritto Universal 80%</span>
+            <h2>Чебуреки</h2>
+            <p>Хрустящие чебуреки с мелкими пузырьками на поверхности и сочной начинкой. Маргарин в тесте делает его мягким и эластичным.</p>
+            <ul class="recipe-meta"><li>⏱ 1,5 часа</li><li>🍽 10 шт.</li><li>🔥 жарка</li></ul>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div>
+            <h3>Ингредиенты</h3>
+            <ul class="ingredients">
+              <li><b>Для теста:</b></li>
+              <li>Мука — 500 г</li>
+              <li>Вода — 200 мл</li>
+              <li>Яйцо — 1 шт.</li>
+              <li>Margaritto Universal 80% (растопленный) — 60 г</li>
+              <li>Соль — 1 ч. л.</li>
+              <li><b>Для начинки:</b></li>
+              <li>Фарш из говядины или баранины — 400 г</li>
+              <li>Лук — 2 шт.</li>
+              <li>Холодная вода — 50 мл</li>
+              <li>Соль, чёрный перец, зира — по вкусу</li>
+              <li>Растительное масло для жарки</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Приготовление</h3>
+            <ol class="steps-list">
+              <li>Смешайте воду, яйцо, соль и растопленный маргарин, постепенно добавляя муку, замесите крутое тесто. Дайте отдохнуть 30 минут.</li>
+              <li>Мелко нарежьте лук, добавьте к фаршу, влейте холодную воду, добавьте специи и хорошо перемешайте — начинка получится сочной.</li>
+              <li>Разделите тесто на 10 частей и тонко раскатайте каждую в круг.</li>
+              <li>Выложите начинку на половину круга, накройте второй половиной и прижмите края вилкой.</li>
+              <li>Обжарьте в разогретом масле по 2–3 минуты с каждой стороны до золотистого цвета.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+
+      <article class="recipe reveal" id="yurakcha">
+        <div class="recipe-head">
+          <div class="recipe-img recipe-emoji" aria-hidden="true">💛</div>
+          <div>
+            <span class="eyebrow">Margaritto Universal 80%</span>
+            <h2>Булочки-сердечки с орехами</h2>
+            <p>Мягкие булочки в форме сердечек с сахаром и орехами — их любят и дети, и взрослые.</p>
+            <ul class="recipe-meta"><li>⏱ 2 часа</li><li>🍽 12 шт.</li><li>🔥 180°C</li></ul>
+          </div>
+        </div>
+        <div class="recipe-body">
+          <div>
+            <h3>Ингредиенты</h3>
+            <ul class="ingredients">
+              <li>Мука — 500 г</li>
+              <li>Тёплое молоко — 250 мл</li>
+              <li>Сухие дрожжи — 7 г</li>
+              <li>Сахар — 60 г (+80 г для посыпки)</li>
+              <li>Яйцо — 1 шт. (+1 для смазки)</li>
+              <li>Margaritto Universal 80% (мягкий) — 80 г (+30 г для смазки)</li>
+              <li>Рубленые грецкие орехи — 100 г</li>
+              <li>Соль — щепотка</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Приготовление</h3>
+            <ol class="steps-list">
+              <li>Растворите дрожжи и сахар в тёплом молоке и оставьте на 10 минут, чтобы появилась пена.</li>
+              <li>Добавьте муку, яйцо, соль и мягкий маргарин, замесите мягкое тесто, накройте и оставьте подниматься на 1 час.</li>
+              <li>Раскатайте тесто прямоугольником, смажьте растопленным маргарином, посыпьте сахаром и орехами.</li>
+              <li>Сверните рулет по длинной стороне и нарежьте на 12 частей. Надрежьте каждую часть вдоль до середины и разверните половинки в форме сердечка.</li>
+              <li>Дайте подняться 15 минут, смажьте яйцом и выпекайте при 180°C 20–25 минут до золотистого цвета.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+
+      <div class="cta reveal" style="margin-top:24px">
+        <div>
+          <h2>Закажите продукты из рецепта</h2>
+          <p>Упаковки 200–500 г для дома и 10–20 кг для цеха.</p>
+        </div>
+        <a href="buyurtma.html" class="btn btn-primary">Оформить заказ →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="logo"><span class="logo-mark"><img src="../images/logo-mark.jpg" alt=""></span><span><b>ABERNO</b><small>GROUP</small></span></a>
+          <p>Узбекская компания — производитель маргаринов, спредов, салфеток Bulut и сырья для салфеток.</p>
+        </div>
+        <div>
+          <h4>Продукция</h4>
+          <ul>
+            <li><a href="margarin.html">Маргарины Margaritto</a></li>
+            <li><a href="margarin.html">Спреды Smaylo</a></li>
+            <li><a href="salfetka.html">Салфетки Bulut</a></li>
+            <li><a href="xomashyo.html">Сырьё для салфеток</a></li>
+            <li><a href="horeca.html">Для HoReCa</a></li>
+            <li><a href="retseptlar.html">Рецепты</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Компания</h4>
+          <ul>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="ishlab-chiqarish.html">Производство</a></li>
+            <li><a href="yangiliklar.html">Новости</a></li>
+            <li><a href="karyera.html">Карьера</a></li>
+            <li><a href="faq.html">Вопросы и ответы</a></li>
+            <li><a href="savdo.html">Отдел продаж</a></li>
+            <li><a href="buyurtma.html">Онлайн-заказ</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Контакты</h4>
+          <ul>
+            <li>📍 г. Ташкент, Яшнабадский район, ул. Уйсозлар, 72</li>
+            <li><a href="tel:+998953427070">📞 +998 95 342 70 70</a></li>
+            <li><a href="tel:+998712300900">📞 +998 71 230 09 00</a></li>
+            <li><a href="https://t.me/aberno_uz" target="_blank" rel="noopener">Telegram: @aberno_uz</a></li>
+            <li><a href="https://instagram.com/aberno.uz" target="_blank" rel="noopener">Instagram: @aberno.uz</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year></span> Aberno Group. Все права защищены.</span>
+        <span>aberno.uz</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="float-contacts">
+    <div class="fc-panel" id="fc-panel" hidden>
+      <form class="form" data-form="Tezkor xabar" novalidate>
+        <p class="fc-title">Напишите нам</p>
+        <p class="fc-sub">Ваше сообщение придёт напрямую нашему менеджеру в Telegram.</p>
+        <div><label>Ваше имя</label><input name="name" maxlength="60" autocomplete="name"></div>
+        <div><label>Телефон</label><input name="phone" type="tel" maxlength="20" placeholder="+998" autocomplete="tel"></div>
+        <div><label>Сообщение</label><textarea name="message" rows="3" maxlength="500"></textarea></div>
+        <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <button class="btn btn-primary" type="submit">Отправить</button>
+        <div class="form-note"></div>
+        <div class="fc-links">
+          <a href="https://t.me/+998953427070" target="_blank" rel="noopener">Написать в Telegram</a>
+          <a href="https://wa.me/998974009198" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </form>
+    </div>
+    <button type="button" class="fc fc-tg fc-toggle" aria-controls="fc-panel" aria-expanded="false" aria-label="Напишите нам"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 4.3 2.9 11.5c-1 .4-1 1.8 0 2.1l4.6 1.5 1.8 5.6c.2.7 1.1.9 1.6.4l2.6-2.5 4.6 3.4c.6.4 1.4.1 1.6-.6L23 5.6c.2-.9-.7-1.6-1.5-1.3ZM9.7 15l-.4 3.6-1.2-3.9 9.6-6.1L9.7 15Z"/></svg></button>
+  </div>
+  <button class="to-top" aria-label="Наверх">↑</button>
+  <script src="../js/i18n.js?v=99193a51"></script>
+  <script src="../js/main.js?v=1defa108"></script>
+</body>
+</html>
