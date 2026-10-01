@@ -148,8 +148,10 @@ def lang_switch(page, current):
 
 
 def hreflang_links(page):
-    tags = [f'<link rel="alternate" hreflang="uz" href="{BASE_URL}{page}">']
-    tags += [f'<link rel="alternate" hreflang="{l}" href="{BASE_URL}{l}/{page}">' for l in LANGS]
+    tail = "" if page == "index.html" else page  # canonical bilan bir xil manzil
+    tags = [f'<link rel="alternate" hreflang="uz" href="{BASE_URL}{tail}">']
+    tags += [f'<link rel="alternate" hreflang="{l}" href="{BASE_URL}{l}/{tail}">' for l in LANGS]
+    tags.append(f'<link rel="alternate" hreflang="x-default" href="{BASE_URL}{tail}">')
     return "\n  ".join(tags)
 
 
@@ -180,16 +182,82 @@ def cache_bust(html, root):
     return re.sub(r'\b(?:href|src)="((?:\.\./)?)((?:css|js)/[\w.-]+\.(?:css|js))(?:\?v=\w+)?"', ver, html)
 
 
+OG_IMAGE = {"salfetka.html": "bulut.jpg", "horeca.html": "bulut.jpg", "retseptlar.html": "retseptlar.jpg",
+            "ishlab-chiqarish.html": "ishlab-chiqarish.jpg", "about.html": "ishlab-chiqarish.jpg",
+            "karyera.html": "ishlab-chiqarish.jpg"}
+OG_LOCALE = {"uz": "uz_UZ", "ru": "ru_RU", "en": "en_US"}
+
+
+def seo_block(html, page, lang):
+    """Google va ijtimoiy tarmoqlar uchun <head> teglari (har yig'ishda qayta yoziladi)."""
+    pre = "" if lang == "uz" else "../"
+    url = BASE_URL + ("" if lang == "uz" else lang + "/") + ("" if page == "index.html" else page)
+    title = re.search(r"<title>(.*?)</title>", html, re.S).group(1).strip()
+    m = re.search(r'<meta name="description" content="([^"]*)">', html)
+    desc = m.group(1) if m else ""
+    img = BASE_URL + "images/og/" + OG_IMAGE.get(page, "aberno.jpg")
+    tags = [
+        f'<link rel="canonical" href="{url}">',
+        f'<link rel="icon" href="{pre}favicon.ico" sizes="any">',
+        f'<link rel="icon" href="{pre}images/icons/icon.svg" type="image/svg+xml">',
+        f'<link rel="apple-touch-icon" href="{pre}images/icons/apple-touch-icon.png">',
+        f'<link rel="manifest" href="{pre}site.webmanifest">',
+        '<meta name="theme-color" content="#173455">',
+        '<meta property="og:type" content="website">',
+        '<meta property="og:site_name" content="Aberno Group">',
+        f'<meta property="og:title" content="{title}">',
+        f'<meta property="og:description" content="{desc}">',
+        f'<meta property="og:url" content="{url}">',
+        f'<meta property="og:image" content="{img}">',
+        '<meta property="og:image:width" content="1200">',
+        '<meta property="og:image:height" content="630">',
+        f'<meta property="og:locale" content="{OG_LOCALE[lang]}">',
+        '<meta name="twitter:card" content="summary_large_image">',
+    ]
+    if page == "index.html":
+        org = {
+            "@context": "https://schema.org", "@type": "Organization", "name": "Aberno Group",
+            "url": BASE_URL, "logo": BASE_URL + "images/icons/icon-512.png",
+            "telephone": "+998953427070", "email": "abernoinfo@gmail.com",
+            "address": {"@type": "PostalAddress", "streetAddress": "Uysozlar 72", "addressLocality": "Tashkent",
+                        "addressRegion": "Yashnobod", "addressCountry": "UZ"},
+            "sameAs": ["https://instagram.com/aberno.uz", "https://t.me/aberno_uz", "https://aberno.uz"],
+            "brand": [{"@type": "Brand", "name": n} for n in ("Margaritto", "Smaylo", "Bulut")],
+        }
+        tags.append('<script type="application/ld+json">' + json.dumps(org, ensure_ascii=False) + "</script>")
+    block = "<!--seo-->\n  " + "\n  ".join(tags) + "\n  <!--/seo-->"
+    html = re.sub(r"\n?\s*<!--seo-->.*?<!--/seo-->", "", html, flags=re.S)
+    html = re.sub(r'\n\s*<link rel="icon" href="[^"]*logo-mark[^"]*">', "", html)
+    return html.replace("</head>", "  " + block + "\n</head>", 1)
+
+
+def write_sitemap(pages):
+    rows = []
+    for page in pages:
+        tail = "" if page == "index.html" else page
+        alts = "".join(f'\n    <xhtml:link rel="alternate" hreflang="{l}" href="{BASE_URL}{"" if l == "uz" else l + "/"}{tail}"/>'
+                       for l in ["uz"] + LANGS)
+        for l in ["uz"] + LANGS:
+            loc = BASE_URL + ("" if l == "uz" else l + "/") + tail
+            rows.append(f"  <url>\n    <loc>{loc}</loc>{alts}\n  </url>")
+    xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+           + "\n".join(rows) + "\n</urlset>\n")
+    open("sitemap.xml", "w", encoding="utf-8").write(xml)
+    open("robots.txt", "w", encoding="utf-8").write(f"User-agent: *\nAllow: /\n\nSitemap: {BASE_URL}sitemap.xml\n")
+
+
 def main():
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     os.chdir(root)
-    pages = sorted(glob.glob("*.html"))
+    pages = sorted(p for p in glob.glob("*.html") if p != "404.html")
     dicts = {l: json.load(open(f"i18n/{l}.json", encoding="utf-8")) for l in LANGS}
     report = {}
 
     for page in pages:
         src = open(page, encoding="utf-8").read()
         src = with_switch_and_alternates(src, page, "uz")
+        src = seo_block(src, page, "uz")
         src = cache_bust(src, root)
         open(page, "w", encoding="utf-8").write(src)
 
@@ -202,6 +270,7 @@ def main():
             html = html.replace('<html lang="uz">', f'<html lang="{lang}">', 1)
             html = fix_paths(html)
             html = with_switch_and_alternates(html, page, lang)
+            html = seo_block(html, page, lang)
             html = cache_bust(html, root)
             open(f"{lang}/{page}", "w", encoding="utf-8").write(html)
         path = f"i18n/missing-{lang}.json"
@@ -211,6 +280,7 @@ def main():
             os.remove(path)
         report[lang] = len(missing)
 
+    write_sitemap(pages)
     for lang, n in report.items():
         print(f"{lang}: {len(pages)} sahifa, tarjimasi yo'q matnlar: {n}" + (f" → i18n/missing-{lang}.json" if n else " ✅"))
     return 1 if any(report.values()) else 0

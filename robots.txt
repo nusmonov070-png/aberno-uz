@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nusmonov070-png.github.io/aberno-uz/sitemap.xml
